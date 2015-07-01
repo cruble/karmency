@@ -2,10 +2,26 @@ require 'rails_helper'
 
 describe Coin, type: :model do
 
-  let(:coin) { create(:coin) }
   let(:creator) { create(:user) }
+  let(:coin) { create(:coin, creator: creator) }
   let(:users) { create_list(:users, 4) }
   let(:moments) { create_list(:moments, 4) }
+
+  before(:each) do
+    # associate moments with coin
+    moments.each do |moment|
+      moment.coin = coin
+    end
+    # associate users with moments
+    moments.each_with_index do |moment, index|
+      if index == 0
+        moment.giver = creator
+      else
+        moment.giver = users[index - 1]
+      end
+      moment.receiver = users[index]
+    end
+  end
 
   it "has a creation date" do
     binding.pry
