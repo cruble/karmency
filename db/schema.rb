@@ -11,7 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150701170218) do
+ActiveRecord::Schema.define(version: 20150701173154) do
+
+  create_table "coins", force: :cascade do |t|
+    t.string   "creation_location"
+    t.string   "code"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "name"
+    t.string   "location"
+    t.text     "description"
+    t.string   "photo_url"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "moments", force: :cascade do |t|
+    t.integer  "coin_id"
+    t.text     "description"
+    t.datetime "date"
+    t.string   "location"
+    t.string   "photo_url"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "moments", ["coin_id"], name: "index_moments_on_coin_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
