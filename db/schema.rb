@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150701173154) do
+ActiveRecord::Schema.define(version: 20150701190225) do
 
   create_table "coins", force: :cascade do |t|
     t.string   "creation_location"
@@ -27,6 +27,12 @@ ActiveRecord::Schema.define(version: 20150701173154) do
     t.string   "photo_url"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "creator_id"
+  end
+
+  create_table "groups_users", id: false, force: :cascade do |t|
+    t.integer "group_id"
+    t.integer "user_id"
   end
 
   create_table "moments", force: :cascade do |t|
