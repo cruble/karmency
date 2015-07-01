@@ -46,6 +46,7 @@ group :test, :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'factory_girl_rails'
+  gem 'faker'
   gem 'simplecov'
   gem 'database_cleaner'
   gem 'sqlite3'
