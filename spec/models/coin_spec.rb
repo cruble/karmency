@@ -3,29 +3,28 @@ require 'rails_helper'
 describe Coin, type: :model do
 
   let(:creator) { create(:user) }
-  let(:coin) { create(:coin, creator: creator) }
-  let(:users) { create_list(:users, 4) }
-  let(:moments) { create_list(:moments, 4) }
+  let(:coin) { create(:coin, creator_id: creator.id) }
+  let(:users) { create_list(:user, 4) }
+  let(:moments) { create_list(:moment, 4) }
 
   before(:each) do
     # associate moments with coin
     moments.each do |moment|
-      moment.coin = coin
+      coin.moments << moment
     end
     # associate users with moments
     moments.each_with_index do |moment, index|
       if index == 0
-        moment.giver = creator
+        coin.givers << creator
       else
-        moment.giver = users[index - 1]
+        coin.givers << users[index - 1]
       end
-      moment.receiver = users[index]
+      coin.receivers << users[index]
     end
   end
 
   it "has a creation date" do
-    binding.pry
-    expect(coin.created_at.class).to eq("datetime")
+    expect(coin.created_at.class).to eq(ActiveSupport::TimeWithZone)
   end
 
   it "has a creation location" do
@@ -41,6 +40,7 @@ describe Coin, type: :model do
   end
 
   it "has many moments" do
+    binding.pry 
     expect(coin.moments.size).to eq(4)
   end
 

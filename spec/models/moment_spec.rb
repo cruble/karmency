@@ -12,7 +12,7 @@ describe Moment, type: :model do
   end
 
   it "has a date" do
-    expect(moment.date.class).to eq("datetime")
+    expect(moment.date).to eq("2015-07-01 13:30:31")
   end
 
   it "has a location" do

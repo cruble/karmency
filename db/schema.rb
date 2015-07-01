@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150701190225) do
+ActiveRecord::Schema.define(version: 20150701203030) do
 
   create_table "coins", force: :cascade do |t|
     t.string   "creation_location"
     t.string   "code"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "creator_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -43,6 +44,8 @@ ActiveRecord::Schema.define(version: 20150701190225) do
     t.string   "photo_url"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "receiver_id"
+    t.integer  "giver_id"
   end
 
   add_index "moments", ["coin_id"], name: "index_moments_on_coin_id"
