@@ -66,7 +66,7 @@ describe User, type: :model do
     moments_for_testing.each do | moment |
       moment.giver = @user
       moment.save
-    end 
+    end
 
     expect(@user.moments_given).to eq(moments_for_testing)
 
@@ -74,54 +74,54 @@ describe User, type: :model do
 
   it "has many moments as receiver" do
 
-     moments_for_testing = Moment.all
+    moments_for_testing = Moment.all
     moments_for_testing.each do | moment |
       moment.receiver = @user
       moment.save
-    end 
+    end
 
     expect(@user.moments_received).to eq(moments_for_testing)
 
   end
 
-  it "has many moments" do 
+  it "has many moments" do
     moments_as_giver = Moment.where("id < 3")
-    
+
     moments_as_giver.each do |moment|
-      moment.giver = @user 
-      moment.save 
-    end 
+      moment.giver = @user
+      moment.save
+    end
 
     moment_as_receiver = Moment.find(1)
 
-    moment_as_receiver.giver = @user 
+    moment_as_receiver.giver = @user
     moment_as_receiver.save
 
     expect(@user.moments.map {|moment| moment.id}).to eq(moments_as_giver.map {|moment| moment.id})
-  end 
+  end
 
-  it "has many coins given" do 
+  it "has many coins given" do
 
     moments_as_giver = Moment.where("id < 3")
-    
+
     moments_as_giver.each do |moment|
-      moment.giver = @user 
-      moment.save 
-    end 
+      moment.giver = @user
+      moment.save
+    end
 
     expect(@user.coins_given.map {|coin| coin.id}).to eq(moments_as_giver.map {|moment| moment.coin.id})
 
-  
-  end 
 
-  it "has many coins received" do 
+  end
+
+  it "has many coins received" do
 
     moments_as_receiver = Moment.where("id < 3")
-    
+
     moments_as_receiver.each do |moment|
-      moment.receiver = @user 
-      moment.save 
-    end 
+      moment.receiver = @user
+      moment.save
+    end
 
     expect(@user.coins_received.map {|coin| coin.id}).to eq(moments_as_receiver.map {|moment| moment.coin.id})
 
@@ -130,29 +130,40 @@ describe User, type: :model do
 
   it "has many coins through moments" do
 
-
     moments_as_giver = Moment.where("id < 3")
-    
+
     moments_as_giver.each do |moment|
-      moment.giver = @user 
-      moment.save 
-    end 
+      moment.giver = @user
+      moment.save
+    end
 
     moment_as_receiver = Moment.find(1)
 
-    moment_as_receiver.giver = @user 
+    moment_as_receiver.giver = @user
     moment_as_receiver.save
 
-    expect(@user.coins.map {|coin| coin.id}).to eq(moments_as_giver.map {|moment| moment.coin.id})
-
-
+    expect(@user.coins.map {|coin| coin.id}).to eq(moments_as_giver.map {|moment| moment.coin.id}.uniq)
   end
 
-  it "owns many groups (as creator)" do
+  it "can own a group (as creator)" do
+    group = @groups.first
+    group.creator = @user
+    group.save
 
+    @user = User.find(@user_id)
+
+    expect(@user.groups_created.first).to eq(group)
   end
 
   it "belongs to many groups" do
+    group = @groups.last
+    group.users << @user
+    group.save
+
+    @user = User.find(@user_id)
+
+    expect(@user.groups.size).to eq(1)
+    expect(@user.groups.first).to eq(group)
 
   end
 

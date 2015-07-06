@@ -11,18 +11,17 @@ class User < ActiveRecord::Base
   has_many :moments_received, foreign_key: "receiver_id", class_name: "Moment"
   has_many :coins_given, through: :moments_given, foreign_key: "giver_id", source: :coin
   has_many :coins_received, through: :moments_received, foreign_key: "receiver_id", source: :coin
+  has_many :groups_created, foreign_key: "creator_id", class_name: "Group"
 
-  def moments 
+  def moments
     Moment.where("receiver_id = ? OR giver_id = ?", self.id, self.id)
-  end 
+  end
 
   def coins
-    binding.pry 
-    moments.joins(:coins)
-  end 
-
-
-
-
+    coin_ids = moments.map do |moment|
+      moment.coin_id
+    end
+    Coin.find(coin_ids)
+  end
 
 end

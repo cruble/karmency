@@ -5,12 +5,11 @@ class Group < ActiveRecord::Base
 
   after_create :add_creator_as_member
 
-  private 
+  private
 
-  def add_creator_as_member 
-
+  def add_creator_as_member
     self.users << self.creator
-  end 
+  end
 
 
 end
