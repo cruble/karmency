@@ -10,6 +10,8 @@ require 'rails_helper'
 #     end
 #   end
 # end
-RSpec.describe GroupsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
+
+# below here was uncommented, but commented for ease of viewing results
+# RSpec.describe GroupsHelper, type: :helper do
+#   pending "add some examples to (or delete) #{__FILE__}"
+# end
