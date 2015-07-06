@@ -4,5 +4,6 @@ FactoryGirl.define do
     date "2015-07-01 13:30:31"
     location "Grand Army Plaza"
     photo_url "https://www.google.com/"
+    coin Coin.first
   end
 end
