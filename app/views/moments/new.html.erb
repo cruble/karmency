@@ -53,5 +53,24 @@
      $('#datetimepicker1').datetimepicker({
          format: 'MM/DD/YY'
      });
+
+     function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(lookupPosition);
+        } 
+    }
+    function lookupPosition(position) {
+        var data = {
+            lat: position.coords.latitude, 
+            lng: position.coords.longitude
+        };
+
+        $.getJSON('/locations/lookup', data, function(data){
+            $("#moment_location").val(data.location);
+        });
+
+    }
+    getLocation();
+
  });
 </script>
