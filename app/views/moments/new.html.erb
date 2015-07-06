@@ -1,0 +1,57 @@
+<div class="well col-md-10 col-md-offset-1">
+    <%= form_for @moment, remote: true, class: "form-horizontal" do |f| %>
+        <fieldset>
+            <legend>Tell us about giving or receiving your Karmency Coin!</legend>
+            <div class="form-group">
+                <label class="col-lg-2 radio control-label">I...</label>
+                <div class="col-lg-10">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                            received a coin
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                            gave a coin
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="moment_description" class="col-lg-2 control-label">Description</label>
+                <div class="col-lg-10">
+                    <%= f.text_area :description, class: "form-control", placeholder: "E.g., A nice young man gave me his seat on the subway!" %>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="moment_date" class="col-lg-2 control-label">Date</label>
+                <div class='col-lg-10'>
+                    <%= f.text_field :date, class: "form-control", id: "datetimepicker1", value: @date_today %>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="moment_location" class="col-lg-2 control-label">Location</label>
+                <div class='col-lg-10'>
+                    <%= f.text_field :location, class: "form-control" %>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="reset" class="btn btn-default">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </fieldset>
+    <% end %>
+</div>
+
+<script>
+ $(document).ready(function(){
+     // initialize date picker
+     $('#datetimepicker1').datetimepicker({
+         format: 'MM/DD/YY'
+     });
+ });
+</script>
