@@ -40,13 +40,13 @@
 
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
-                    <button type="reset" class="btn btn-default">Cancel</button>
                     <% if user_signed_in? %>
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <% else %>
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal2">Sign Up to Save This Moment</button>
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Or Login</button>
                     <% end %>
+                    <button type="reset" class="btn btn-default">Cancel</button>
                 </div>
             </div>
         </fieldset>
@@ -135,8 +135,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-

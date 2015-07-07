@@ -1,10 +1,10 @@
 <div class="cointainer col-md-offset-1">
-    <div class="container col-md-11">
+    <div class="container col-md-9">
         <div id="coin-image" class="col-md-3">
-            <img src="http://www.online-image-editor.com//styles/2014/images/example_image.png" alt="sheep" class="img-rounded" style="width: 270px;">
+            <img src="http://img4.wikia.nocookie.net/__cb20140520034130/mariokart/images/1/17/CoinMK8.png" alt="sheep" class="img-responsive">
         </div>
         <div id="coin stats" class="col-md-offset-3">
-            <h1>Coin <%= @coin.code %></h1>
+            <h2>Coin <%= @coin.code %></h2>
             <div class="list-group col-md-4">
                 <p class="list-group-item">
                     Created by:<%= " " + @coin.creator.formatted_name%>
@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="container col-md-11">
-        <h2>Transactions</h2>
+        <h3 style="padding-left: 5px;">Transactions</h3>
         <div class="well container">
             <%= link_to "+ Add a new transaction", new_coin_moment_path(@coin), class: "new-moment-link" %>
         </div>
