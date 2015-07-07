@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+
   resources :groups
-  resources :moments
-  resources :coins
+  resources :coins do 
+    resources :moments
+  end 
+
   devise_for :users
 
   get 'locations/lookup', to: 'locations#lookup'
