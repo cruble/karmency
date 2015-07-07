@@ -20,6 +20,9 @@
     </div>
     <div class="container col-md-11">
         <h2>Transactions</h2>
-        <%= render @moments %>
+        <div class="well container">
+            <%= link_to "+ Add a new transaction", new_coin_moment_path(@coin), class: "new-moment-link" %>
+        </div>
+        <%= render @moments.sort_by{|moment| moment.date}.reverse %>
     </div>
 </div>
