@@ -41,11 +41,46 @@
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
                     <button type="reset" class="btn btn-default">Cancel</button>
+                    <% if user_signed_in? %>
                     <button type="submit" class="btn btn-primary">Submit</button>
+                    <% else %>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal2">Sign Up to Save This Moment</button>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Or Login</button>
+                    <% end %>
                 </div>
             </div>
         </fieldset>
     <% end %>
+</div>
+
+<!-- Modal - Sign_In  -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Sign In To Follow Your Karma</h4>
+      </div>
+      <div class="modal-body">
+      <%= render partial: 'devise/registrations/signin' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal - Sign_Up -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Sign Up to Track Good Karma</h4>
+      </div>
+      <div class="modal-body">
+      <%= render partial: 'devise/registrations/signup' %>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -73,5 +108,35 @@
     }
     getLocation();
 
+    $('#myModal').on('shown.bs.modal', function () {
+      $('#myInput').focus()
+    });
+
  });
 </script>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
