@@ -1,9 +1,9 @@
 <div class="well col-md-10 col-md-offset-1">
-    <%= form_for [@coin, @moment], remote: true, class: "form-horizontal" do |f| %>
+    <%= form_for [@coin, @moment], html: {class: "form-horizontal"}, remote: true do |f| %>
         <fieldset>
             <legend>Tell us about giving or receiving your Karmency Coin!</legend>
             <div class="form-group">
-                <label class="col-lg-2 radio control-label">I...</label>
+                <label class="col-lg-2 control-label">I...</label>
                 <div class="col-lg-10">
                     <div class="radio">
                         <label>
@@ -58,11 +58,11 @@
      function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(lookupPosition);
-        } 
+        }
     }
     function lookupPosition(position) {
         var data = {
-            lat: position.coords.latitude, 
+            lat: position.coords.latitude,
             lng: position.coords.longitude
         };
 

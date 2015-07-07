@@ -1,0 +1,28 @@
+<div class="cointainer col-md-offset-1">
+    <div class="container col-md-11">
+        <div id="coin-image" class="col-md-3">
+            <img src="http://www.online-image-editor.com//styles/2014/images/example_image.png" alt="sheep" class="img-rounded" style="width: 270px;">
+        </div>
+        <div id="coin stats" class="col-md-offset-3">
+            <h1>Coin <%= @coin.code %></h1>
+            <div class="list-group col-md-4">
+                <p class="list-group-item">
+                    Created by:<%= " " + @coin.creator.formatted_name%>
+                </p>
+                <p class="list-group-item">
+                    Minted:<%= " " + @coin.created_at.strftime("%B %d, %Y") %>
+                </p>
+                <p class="list-group-item">
+                    Total transactions:<%= " " + @coin.moments.size.to_s %>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container col-md-11">
+        <h2>Transactions</h2>
+        <div class="well container">
+            <%= link_to "+ Add a new transaction", new_coin_moment_path(@coin), class: "new-moment-link" %>
+        </div>
+        <%= render @moments.sort_by{|moment| moment.date}.reverse %>
+    </div>
+</div>

@@ -24,4 +24,16 @@ class User < ActiveRecord::Base
     Coin.find(coin_ids)
   end
 
+  def formatted_name
+    if first_name
+      if last_name
+        first_name + " " + last_name[0] + "."
+      else
+        first_name
+      end
+    else
+      "Anonymous"
+    end
+  end
+
 end
