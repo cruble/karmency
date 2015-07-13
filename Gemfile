@@ -26,6 +26,9 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 # add geolocation
 gem 'geocoder'
 
+# add font-awesome
+gem "font-awesome-rails"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
