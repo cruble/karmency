@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html" style="padding-top: 9px;"><img src="/img/logo.png" alt="Karmency" style="width: 120px"></a>
+            <a class="navbar-brand" href="/" style="padding-top: 9px;"><img src="/img/logo.png" alt="Karmency" style="width: 120px"></a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -57,13 +57,12 @@
                     <% if user_signed_in? %>
                   <!-- User Logged In Navbar -->
                     <li class="dropdown active ">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome back, <%= current_user.first_name%> <i class="fa fa-angle-down"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, <%= current_user.first_name%> <i class="fa fa-angle-down"></i></a>
                         <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                             <li><a href="">My Coins</a></li>
                             <li><a href="">Create a new coin</a></li>
                             <li><a href="">My Groups</a></li>
                             <li><a href="">Create a new group</a></li>
-
                             <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
                             <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
 
@@ -79,35 +78,17 @@
 
                     <a href="#" class=" dropdown-toggle" data-toggle="dropdown"><i class="fa fa-lock"></i> Sign In</a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-login-box animated fadeInUp">
-                        <%= form_for(:user, :url => session_path(:user)) do |f| %>
 
-                            <h4>Signin</h4>
+                    <%= render "devise/registrations/signin" %>
+                    <hr>
+                    <p>
+                        Don't have an account? 
+                        <%= link_to "Register Now", new_user_registration_path %>
+                    </p>
 
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                      <%= f.text_field :email, placeholder: "email address", class: "form-control" %>
-                                </div>
-                                <br>
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                    <%= f.password_field :password, class: "form-control" %>
-                                </div>
-                                <div class="checkbox pull-left">
-                                    <label>
-                                         <%= f.check_box :remember_me %> Remember me
-                                    </label>
-                                </div>
-                                <%= f.submit 'Sign in', class: "btn btn-theme btn-primary pull-right"  %>
-                                <!--                                        <button type="submit" class="btn btn-theme pull-right">Login</button>                 -->
-                                <div class="clearfix"></div>
-                                  <%= link_to "Forgot your password?", new_password_path(:user) %>
-                                <hr>
-                                <p>Don't have an account!  <%= link_to "Register now", new_user_registration_path %></p>
-                            </div>
-                            <% end %>
-                        <% end %>
+                    
                     </div>
+                    <% end %>
                     <!-- END User Not Signed In In Navbar -->
 
                 </li> <!--menu login li end here-->

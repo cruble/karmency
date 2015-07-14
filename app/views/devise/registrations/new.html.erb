@@ -6,20 +6,24 @@
 
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs text-center" role="tablist">
-                    <li role="presentation" class="active"><a href="#login" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
-                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Register</a></li>
+                    <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Register</a></li>
+                    <li role="presentation" ><a href="#login" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
+
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content"> 
-                <!-- login tab begin -->
-                    <div role="tabpanel" class="tab-pane active" id="login">
-                        <%= render "signin" %>
-                    </div><!--login tab end-->
+
                     <!-- register tab begin -->
-                    <div role="tabpanel" class="tab-pane" id="profile">
+                    <div role="tabpanel" class="tab-pane active" id="profile">
                         <%= render "signup" %>
                     </div><!--register tab end-->
+
+                    <!-- login tab begin -->
+                    <div role="tabpanel" class="tab-pane" id="login">
+                        <%= render "signin" %>
+                    </div><!--login tab end-->
+
                 </div>
 
             </div>
