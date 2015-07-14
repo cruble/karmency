@@ -14,6 +14,7 @@
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="login">
                         <form>
+
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email address</label>
                                 <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
@@ -35,9 +36,11 @@
                     </div><!--login tab end-->
                     <div role="tabpanel" class="tab-pane" id="profile">
                         <form>
+                            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form-horizontal"}) do |f| %>
+        <%= devise_error_messages! %>
                             <div class="form-group">
-                                <label for="exampleInputname">Name</label>
-                                <input type="text" class="form-control" id="exampleInputname" placeholder="Enter email">
+                                <label for="first_name">First Name</label>
+                                <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail11">Email address</label>
@@ -60,6 +63,7 @@
                             <div class="pull-right">
                                 <button type="submit" class="btn btn-theme-dark btn-lg">Register</button>
                             </div>
+                            <% end %>
                             <div class="clearfix"></div>
                         </form>
                     </div><!--register tab end-->
