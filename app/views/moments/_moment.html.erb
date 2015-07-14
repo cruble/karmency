@@ -1,20 +1,14 @@
-<div class="well container">
-    <div class="col-md-2">
-        <h1><%= "#{moment.month} #{moment.day}" %></h1>
-    </div>
-    <div class="user-thumb col-md-2">
-        <img src="http://www.online-image-editor.com//styles/2014/images/example_image.png" alt="sheep" class="img-thumbnail">
-    </div>
-    <div class="user-name col-md-2">
-        <h3>Receiver</h3>
-        <p><%= moment.receiver_name %></p>
-    </div>
-    <div class="moment-location col-md-2">
-        <h3>Location</h3>
-        <p><%= moment.location %></p>
-    </div>
-    <div class="moment-description col-md-4">
-        <h3>Description</h3>
-        <p><%= moment.description %></p>
-    </div>
+<div class="timeline-panel wow animated fadeInUp animated" style="visibility: visible; animation-name: fadeInUp; -webkit-animation-name: fadeInUp;">
+    <div class="timeline-body" style="text-align: center">
+        <h2>
+            <!-- image to be replaced here -->
+            <img src="http://i474.photobucket.com/albums/rr108/nothing_wong/Blog/tumblr_kp6vzuoDqe1qz7l0a.jpg" class="img-circle" width="70px" height="70px" style="margin-left: auto; margin-right: auto; display: block;">
+            <a href="#">Recipient: <%= moment.receiver_name %></a>
+
+            <ul class="list-inline post-detail" style="text-align: left">
+                <li><i class="fa fa-calendar"></i><%= "#{moment.month} #{moment.day}, 2015" %></li>
+                <li class="pull-right"><i class="fa fa-map-marker"></i><%= moment.location %></li>
+            </ul>
+            <div style="padding-left: 0px"><p style="text-align: left">He gave me his seat on the subway!</p></div>
+        </h2></div>
 </div>
