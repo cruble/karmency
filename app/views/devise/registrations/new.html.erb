@@ -11,61 +11,14 @@
                 </ul>
 
                 <!-- Tab panes -->
-                <div class="tab-content">
+                <div class="tab-content"> 
+                <!-- login tab begin -->
                     <div role="tabpanel" class="tab-pane active" id="login">
-                        <form>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                            </div>
-                            <div class="pull-left">
-
-                                <p><a href="#">Forget password?</a></p>
-
-                            </div>
-                            <div class="pull-right">
-                                <button type="submit" class="btn btn-theme-dark">Login</button>
-                            </div>
-                            <div class="clearfix"></div>
-                        </form>
+                        <%= render "signin" %>
                     </div><!--login tab end-->
+                    <!-- register tab begin -->
                     <div role="tabpanel" class="tab-pane" id="profile">
-                        <form>
-                            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form-horizontal"}) do |f| %>
-        <%= devise_error_messages! %>
-                            <div class="form-group">
-                                <label for="first_name">First Name</label>
-                                <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail11">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail11" placeholder="Enter email">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword11">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword11" placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword111">Re-Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword111" placeholder="Password">
-                            </div>
-                            <div class="pull-left checkbox">
-                                <label>
-                                    <input type="checkbox"> Accept terms & condition.
-                                </label>
-
-                            </div>
-                            <div class="pull-right">
-                                <button type="submit" class="btn btn-theme-dark btn-lg">Register</button>
-                            </div>
-                            <% end %>
-                            <div class="clearfix"></div>
-                        </form>
+                        <%= render "signup" %>
                     </div><!--register tab end-->
                 </div>
 
