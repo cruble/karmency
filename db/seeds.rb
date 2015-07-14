@@ -6,9 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-chad = User.create(email: "chad@example.com", password: "flatiron")
-parker = User.create(email: "parker@example.com", password: "flatiron")
-amanda = User.create(email: "amanda@example.com", password: "flatiron")
+chad = User.create(first_name: "Chad", last_name: "Ruble", email: "chad@example.com", password: "flatiron")
+parker = User.create(first_name: "Parker", last_name: "Lawrence", email: "parker@example.com", password: "flatiron")
+amanda = User.create(first_name: "Amanda", last_name: "Chang", email: "amanda@example.com", password: "flatiron")
 
 coin1 = Coin.create(code: "0001", creator: chad)
 coin2 = Coin.create(code: "0002", creator: parker)
