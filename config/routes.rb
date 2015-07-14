@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'coins/lookup', to: 'coins#lookup'
+
   resources :groups
   resources :coins do
     resources :moments
@@ -10,7 +12,7 @@ Rails.application.routes.draw do
   get 'locations/validate', to: 'locations#validate'
   get 'locations/lookup', to: 'locations#lookup'
   
-  root 'coins#index'
+  root 'application#home'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
