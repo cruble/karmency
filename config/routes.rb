@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
 
   resources :groups
-  resources :coins do 
+  resources :coins do
     resources :moments
-  end 
+  end
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 
-
+  get 'locations/validate', to: 'locations#validate'
   get 'locations/lookup', to: 'locations#lookup'
 
   # The priority is based upon order of creation: first created -> highest priority.
