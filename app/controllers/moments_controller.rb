@@ -5,4 +5,14 @@ class MomentsController < ApplicationController
     @coin = Coin.find(params[:coin_id])
   end
 
+  def create
+    binding.pry
+  end
+
+  private
+
+  def moment_params
+    #
+  end
+
 end
