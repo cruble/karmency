@@ -7,11 +7,13 @@ Rails.application.routes.draw do
     resources :moments
   end
 
-  devise_for :users, :controllers => { registrations: 'registrations' }
+  devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions'}
 
   get 'locations/validate', to: 'locations#validate'
   get 'locations/lookup', to: 'locations#lookup'
-  
+
+  get '/login_status', to: 'application#login_status'
+
   root 'application#home'
 
   # The priority is based upon order of creation: first created -> highest priority.

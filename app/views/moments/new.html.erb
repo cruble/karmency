@@ -105,15 +105,56 @@
         <hr>
         <div class="divide30"></div>
         <footer class="text-right">
-            <%= f.submit "Submit", class: "btn btn-theme-dark btn-lg"%>
+            <%= f.submit "Submit", class: "btn btn-theme-dark btn-lg" %>
         </footer>
     <% end %>
     <!--sky form end here-->
+
+    <!-- begin modal form -->
+    <form action="" id="login-form" class="sky-form sky-form-modal">
+        <header>Login form</header>
+
+        <fieldset>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">E-mail</label>
+                    <div class="col col-8">
+                        <label class="input">
+                            <i class="icon-append fa fa-user"></i>
+                            <input type="email" name="email" id="login-email">
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="row">
+                    <label class="label col col-4">Password</label>
+                    <div class="col col-8">
+                        <label class="input">
+                            <i class="icon-append fa fa-lock"></i>
+                            <input type="password" name="password" id="login-password">
+                        </label>
+                        <div class="note"><a href="#">Not signed up yet? Register</a></div>
+                    </div>
+                </div>
+            </section>
+
+        </fieldset>
+        <footer>
+            <button type="submit" class="button">Log in</button>
+            <a href="#" id="close-login-form" class="button button-secondary modal-closer">Close</a>
+        </footer>
+    </form>
+    <!-- end modal form -->
 </div>
+<a id="open-login-form" href="#login-form" class="modal-opener" style="display: none"></a>
+
 
 <!--sky form plugin js-->
 <script src="/sky-form/js/jquery.form.min.js" type="text/javascript"></script>
 <script src="/sky-form/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="/sky-form/js/jquery.modal.js"></script>
 <script src="/sky-form/js/jquery-ui.min.js"></script>
 
 <script type="text/javascript">
@@ -190,9 +231,33 @@
 
      }, "Must be valid location.");
 
+     // check login status
+     $.validator.addMethod("isLoggedIn", function(value, element, arg){
+         var isSuccess = false;
+
+         // check if user logged in
+         $.ajax({ url: "/login_status",
+                  dataType: "json",
+                  beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                  async: false,
+                  success:
+                  function(data) {
+                      isSuccess = data.loginStatus ? true : false
+                  }
+         });
+
+         // handle not logged in
+         if (!isSuccess) {
+             $('#open-login-form').click();
+         };
+
+         return isSuccess;
+     }, "");
+
      // don't validate city field unless submit event, since it requires AJAX call
      $.validator.defaults.onfocusout = function (element, event) {
          if ($(element).data("control") === "myCityControl") return;
+         if ($(element).data("control") === "myLoginControl") return;
          if (!this.checkable(element) && (element.name in this.submitted || !this.optional(element))) {
              this.element(element);
          }
@@ -200,6 +265,7 @@
 
      $.validator.defaults.onkeyup = function (element, event) {
          if ($(element).data("control") === "myCityControl") return;
+         if ($(element).data("control") === "myLoginControl") return;
          if (event.which === 9 && this.elementValue(element) === "") {
              return;
          }
@@ -223,7 +289,8 @@
              },
              "moment[city]": {
                  required: true,
-                 isValidLocation: true
+                 isValidLocation: true,
+                 isLoggedIn: true // TODO: make this less hackey
              }
          },
          messages: {
@@ -245,6 +312,40 @@
          errorPlacement: function(error, element) {
              error.insertAfter(element.parent());
          }
+     });
+
+     $('#login-form').submit(function(e){
+         e.preventDefault();
+
+         var email = $('#login-email').val();
+         var password = $('#login-password').val();
+         var data = {
+             user: {
+                 email: email,
+                 password: password,
+                 remember_me: 1
+             }
+         };
+
+         $.ajax({ url: '/users/sign_in',
+                  type: 'POST',
+                  dataType: 'JSON',
+                  beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                  data: data,
+                  success: function(response, status, xhr) {
+                      var csrf_param = xhr.getResponseHeader('X-CSRF-Param');
+                      var csrf_token = xhr.getResponseHeader('X-CSRF-Token');
+
+                      if (csrf_param) {
+                          $('meta[name="csrf-param"]').attr('content', csrf_param);
+                      }
+                      if (csrf_token) {
+                          $('meta[name="csrf-token"]').attr('content', csrf_token);
+                      }
+                      $('input[name="authenticity_token"]').val(csrf_token);
+                      $('#close-login-form').click();
+                  }
+         });
      });
  });
 </script>
