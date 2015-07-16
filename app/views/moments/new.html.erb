@@ -3,19 +3,23 @@
     <!--sky form -->
     <h3 class="margin20">Tell us about your Karmency transaction!</h3>
 
-    <form action=<%= "/coins/" + @coin.id.to_s + "/moments" %> id="sky-form" class="sky-form" method="post">
-        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+<%= form_for [@coin, @moment], html: {id: "sky-form", class: "sky-form"} do |f| %>
+
         <fieldset>
             <section>
             <div class="inline-group">
-            <label class="radio"><input type="radio" name="radio-inline" checked=""><i></i>I received the coin from someone else</label>
-            <label class="radio"><input type="radio" name="radio-inline"><i></i>I gave the coin to someone else</label>
+
+            <label class="radio">
+            <input type="radio" name="moment[receiver]" checked=""><i></i>I received the coin from someone else
+            </label>
+
+            <label class="radio"><input type="radio" name="moment[giver]"><i></i>I gave the coin to someone else</label>
                 </div>
             </section>
             <label class="label">Description</label>
             <section>
             <label class="textarea">
-            <textarea rows="3" name="description" placeholder="e.g. 'He gave me his seat on the subway'"></textarea>
+            <%= f.text_area :description, rows: "3", placeholder: "e.g. 'He gave me his seat on the subway'" %>
                 </label>
             </section>
         </fieldset>
@@ -25,13 +29,13 @@
                 <section class="col col-4">
                     <label class="input">
                         <i class="icon-append fa fa-calendar"></i>
-                        <input type="text" name="date" id="date">
+                        <input type="text" name="moment[date]" id="date">
                     </label>
                 </section>
 
                 <section class="col col-4">
                     <label class="select">
-                        <select name="state">
+                        <select name="moment[state]">
                             <option value="0">State</option>
                             <option value="NA">Non-U.S.</option>
                             <option value="AL">Alabama</option>
@@ -92,7 +96,7 @@
 
                 <section class="col col-4">
                     <label class="input">
-                        <input type="text" name="city" placeholder="City" data-control="myCityControl">
+                        <input type="text" name="moment[city]" placeholder="City" data-control="myCityControl">
                     </label>
                 </section>
 
@@ -102,9 +106,10 @@
         <hr>
         <div class="divide30"></div>
         <footer class="text-right">
-            <button type="submit" class="btn btn-theme-dark btn-lg">Submit</button>
+            <%= f.submit "Submit", class: "btn btn-theme-dark btn-lg"%>
+
         </footer>
-    </form>
+        <% end %>
     <!--sky form end here-->
 </div>
 
@@ -127,10 +132,10 @@
              lng: position.coords.longitude
          };
          $.getJSON('/locations/lookup', data, function(data){
-             $('input[name="city"]').val(data.city);
+             $('input[name="moment[city]"]').val(data.city);
              var abbrev = $( "option:contains('" + data.state + "')" ).val();
              if (abbrev) {
-                 $("select[name='state']").val(abbrev);
+                 $("select[name='moment[state]']").val(abbrev);
              };
          });
      }
@@ -169,8 +174,8 @@
      }, "Value must not equal arg.");
 
      $.validator.addMethod("isValidLocation", function(value, element, arg){
-         var state = $('option[value=' + $('select[name="state"]').val() + ']')[0].text;
-         var city = $('input[name="city"]').val();
+         var state = $('option[value=' + $('select[name="moment[state]"]').val() + ']')[0].text;
+         var city = $('input[name="moment[city]"]').val();
          var isSuccess = false;
 
          $.ajax({ url: "/locations/validate",
