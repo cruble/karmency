@@ -3,7 +3,9 @@ class CreateMoments < ActiveRecord::Migration
     create_table :moments do |t|
       t.references :coin, index: true
       t.text :description
-      t.datetime :date
+      t.date :date
+      t.string :city
+      t.string :state
       t.string :location
       t.string :photo_url
 

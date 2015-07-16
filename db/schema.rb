@@ -39,7 +39,9 @@ ActiveRecord::Schema.define(version: 20150707181758) do
   create_table "moments", force: :cascade do |t|
     t.integer  "coin_id"
     t.text     "description"
-    t.datetime "date"
+    t.date     "date"
+    t.string   "city"
+    t.string   "state"
     t.string   "location"
     t.string   "photo_url"
     t.datetime "created_at",  null: false

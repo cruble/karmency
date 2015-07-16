@@ -2,6 +2,10 @@
  .colored-link {
      color: #E74C67;
  }
+ h3.heading {
+     font-size: 1.5em;
+ }
+
 </style>
 
 <div class="divide30"></div>
@@ -9,51 +13,97 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 margin30">
-            <h3 class="heading">Services by me</h3>
-            <ul class="services-me list-unstyled">
-                <li><i class="fa fa-image"></i> Web Design</li>
-                <li><i class="fa fa-desktop"></i> Responsive Layout</li>
-                <li><i class="fa fa-html5"></i> HTML5 and CSS3</li>
-            </ul>
-        </div><!--my services-->
+            <h3 class="heading">Coin &nbsp; <%= @coin.code %></h3>
+            <div class="item-img-wrap ">
+                <img src="/img/img-1.jpg" class="img-responsive" alt="workimg">
+                <div class="item-img-overlay">
+                    <a href="/img/img-1.jpg" class="show-image">
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div><!-- coin image -->
         <div class="col-md-7 col-md-offset-1">
-            <h3 class="heading">my skills</h3>
-            <div class="skills-wrapper wow animated bounceIn animated animated animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; -webkit-animation-delay: 0.2s; animation-name: bounceIn; -webkit-animation-name: bounceIn;">
-                <h3 class="heading-progress">Web Design <span class="pull-right">88%</span></h3>
-                <div class="progress">
-                    <div class="progress-bar" style="width: 88%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="88" role="progressbar">
+            <h3 class="heading">coin stats</h3>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
+                                Collapsible Group Item #1
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
                     </div>
                 </div>
-                <h3 class="heading-progress">Web Development <span class="pull-right">78%</span></h3>
-                <div class="progress">
-                    <div class="progress-bar" style="width: 78%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="78" role="progressbar">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="false">
+                                Collapsible Group Item #2
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
                     </div>
                 </div>
-                <h3 class="heading-progress">Marketing <span class="pull-right">82%</span></h3>
-                <div class="progress">
-                    <div class="progress-bar" style="width: 82%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="82" role="progressbar">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
+                                Collapsible Group Item #3
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="collapsed" aria-expanded="false">
+                                Collapsible Group Item #4
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse" aria-expanded="false">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive" class="collapsed" aria-expanded="false">
+                                Collapsible Group Item #5
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseFive" class="panel-collapse collapse" aria-expanded="false">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
                     </div>
                 </div>
             </div>
-        </div><!--my skills-->
+        </div><!-- coin stats-->
     </div>
 </div>
-
-<div class="divide20"></div>
-
-<div class="breadcrumb-wrap">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-8">
-                <h4>Transactions // <%= link_to "+ Add a new transaction", new_coin_moment_path(@coin), class: "colored-link" %></h4>
-            </div>
-        </div>
-    </div>
-</div><!--breadcrumbs-->
-
 <div class="divide20"></div>
 <!--=== Content Part ===-->
 <div class="container">
+    <h3 class="heading">Transactions &nbsp; | <%= link_to "&nbsp;<i class='fa fa-plus'></i>&nbsp;Add a new transaction".html_safe, new_coin_moment_path(@coin), class: "colored-link" %></h3>
     <ul class="timeline">
         <% icons = ["fa-smile-o","fa-motorcycle","fa-bolt","fa-certificate", "fa-dot-circle-o", "fa-bug", "fa-gift", "fa-eye", "fa-heart-o", "fa-futbol-o", "fa-globe", "fa-life-buoy", "fa-moon-o", "fa-paper-plane-o","fa-heart","fa-rocket", "fa-puzzle-piece", "fa-star-o", "fa-thumbs-up", "fa-umbrella", "fa-truck", "fa-trophy", "fa-wrench"] %>
         <% @moments.each_with_index do |moment, index| %>
