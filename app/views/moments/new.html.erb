@@ -3,23 +3,22 @@
     <!--sky form -->
     <h3 class="margin20">Tell us about your Karmency transaction!</h3>
 
-<%= form_for [@coin, @moment], html: {id: "sky-form", class: "sky-form"} do |f| %>
-
+    <%= form_for [@coin, @moment], html: {id: "sky-form", class: "sky-form"} do |f| %>
         <fieldset>
             <section>
-            <div class="inline-group">
+                <div class="inline-group">
 
-            <label class="radio">
-            <input type="radio" name="moment[giver_receiver]" value="receiver" checked=""><i></i>I received the coin from someone else
-            </label>
+                    <label class="radio">
+                        <input type="radio" name="moment[giver_receiver]" value="receiver" checked=""><i></i>I received the coin from someone else
+                    </label>
 
-            <label class="radio"><input type="radio" value="giver" name="moment[giver_receiver]"><i></i>I gave the coin to someone else</label>
+                    <label class="radio"><input type="radio" value="giver" name="moment[giver_receiver]"><i></i>I gave the coin to someone else</label>
                 </div>
             </section>
             <label class="label">Description</label>
             <section>
-            <label class="textarea">
-            <%= f.text_area :description, rows: "3", placeholder: "e.g. 'He gave me his seat on the subway'" %>
+                <label class="textarea">
+                    <%= f.text_area :description, rows: "3", placeholder: "e.g. 'He gave me his seat on the subway'" %>
                 </label>
             </section>
         </fieldset>
@@ -107,9 +106,8 @@
         <div class="divide30"></div>
         <footer class="text-right">
             <%= f.submit "Submit", class: "btn btn-theme-dark btn-lg"%>
-
         </footer>
-        <% end %>
+    <% end %>
     <!--sky form end here-->
 </div>
 
@@ -213,33 +211,33 @@
      // Validation
      $("#sky-form").validate({
          rules: {
-             description: {
+             "moment[description]": {
                  required: true
              },
-             date: {
+             "moment[date]": {
                  required: true,
                  date: true
              },
-             state: {
+             "moment[state]": {
                  valueNotEquals: "0"
              },
-             city: {
+             "moment[city]": {
                  required: true,
                  isValidLocation: true
              }
          },
          messages: {
-             description: {
+             "moment[description]": {
                  required: "Enter a description"
              },
-             date: {
+             "moment[date]": {
                  required: "Enter the date of the transaction",
                  date: "Must be a valid date"
              },
-             state: {
+             "moment[state]": {
                  valueNotEquals: 'Please enter a valid U.S. state or specify "Non-U.S."'
              },
-             city: {
+             "moment[city]": {
                  required: "Enter the city where the transaction took place"
              }
          },
@@ -248,6 +246,5 @@
              error.insertAfter(element.parent());
          }
      });
-
  });
 </script>
