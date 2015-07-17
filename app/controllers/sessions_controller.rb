@@ -6,6 +6,7 @@ class SessionsController < Devise::SessionsController
 
   protected
 
+  # TODO: check to see if this is still needed if login form set to remote: true
   def set_csrf_headers
     if request.xhr?
       # Add the newly created csrf token to the page headers

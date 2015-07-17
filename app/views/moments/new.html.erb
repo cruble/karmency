@@ -314,6 +314,7 @@
          }
      });
 
+     // TODO: check to see if this is still needed if login form set to remote: true
      $('#login-form').submit(function(e){
          e.preventDefault();
 
@@ -342,6 +343,7 @@
                       if (csrf_token) {
                           $('meta[name="csrf-token"]').attr('content', csrf_token);
                       }
+                      // TODO: check to see if this line is still needed if new moment form set to remote: true
                       $('input[name="authenticity_token"]').val(csrf_token);
                       $('#close-login-form').click();
                   }
