@@ -5,11 +5,12 @@
  h3.heading {
      font-size: 1.5em;
  }
-
 </style>
 
+<!-- spacing -->
 <div class="divide30"></div>
 
+<!-- coin summary info (above transactions) -->
 <div class="container">
     <div class="row">
         <div class="col-md-4 margin30">
@@ -100,8 +101,12 @@
         </div><!-- coin stats-->
     </div>
 </div>
+<!-- end coin summary info -->
+
+<!-- spacing -->
 <div class="divide20"></div>
-<!--=== Content Part ===-->
+
+<!-- timeline -->
 <div class="container">
     <h3 class="heading">Transactions &nbsp; | <%= link_to "&nbsp;<i class='fa fa-plus'></i>&nbsp;Add a new transaction".html_safe, new_coin_moment_path(@coin), class: "colored-link" %></h3>
     <ul class="timeline">
@@ -121,5 +126,5 @@
         <% end %>
         <li class="clearfix" style="float: none;"></li>
     </ul>
-</div><!--/container-->
-<!-- End Content Part -->
+</div>
+<!-- end timeline -->

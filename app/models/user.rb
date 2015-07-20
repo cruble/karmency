@@ -27,9 +27,9 @@ class User < ActiveRecord::Base
   def formatted_name
     if first_name
       if last_name
-        first_name + " " + last_name[0] + "."
+        first_name.capitalize + " " + last_name[0].upcase + "."
       else
-        first_name
+        first_name.capitalize
       end
     else
       "Anonymous"

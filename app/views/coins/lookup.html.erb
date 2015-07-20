@@ -27,6 +27,8 @@
 <script type="text/javascript">
  $(document).ready(function(){
 
+     $('input[name="code"]').focus();
+
      //set up validation
      $.validator.addMethod("isValidCode", function(value, element, arg){
          var url = "/coins/" + $('input[name="code"]').val();
