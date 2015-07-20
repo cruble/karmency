@@ -99,6 +99,8 @@
                     </label>
                 </section>
 
+                <input type="hidden" name="login" data-control="myLoginControl">
+
             </div>
         </fieldset>
         <div class="divide30"></div>
@@ -109,6 +111,44 @@
         </footer>
     <% end %>
     <!--sky form end here-->
+
+    <!-- Test modal -->
+    <div class="modal fade modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">You must login to create a moment</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-10 col-sm-offset-1">
+                            <div role="tabpanel">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs text-center" role="tablist">
+                                    <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Register</a></li>
+                                    <li role="presentation" ><a href="#login" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
+
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <!-- register tab begin -->
+                                    <div role="tabpanel" class="tab-pane active" id="profile">
+                                        <%= render "devise/registrations/signup" %>
+                                    </div><!--register tab end-->
+
+                                    <!-- login tab begin -->
+                                    <div role="tabpanel" class="tab-pane" id="login">
+                                        <%= render "/devise/registrations/signin" %>
+                                    </div><!--login tab end-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- begin modal form -->
     <form action="" id="login-form" class="sky-form sky-form-modal">
@@ -148,7 +188,6 @@
     </form>
     <!-- end modal form -->
 </div>
-<a id="open-login-form" href="#login-form" class="modal-opener" style="display: none"></a>
 
 
 <!--sky form plugin js-->
@@ -156,6 +195,7 @@
 <script src="/sky-form/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="/sky-form/js/jquery.modal.js"></script>
 <script src="/sky-form/js/jquery-ui.min.js"></script>
+<script src="/js/sweetalert.min.js"></script>
 
 <script type="text/javascript">
  $(document).ready(function(){
@@ -248,11 +288,16 @@
 
          // handle not logged in
          if (!isSuccess) {
-             $('#open-login-form').click();
+             $('#myModal').modal('toggle');
          };
 
          return isSuccess;
      }, "");
+
+     // allows validation of hidden fields
+     $.validator.setDefaults({
+         ignore: []
+     });
 
      // don't validate city field unless submit event, since it requires AJAX call
      $.validator.defaults.onfocusout = function (element, event) {
@@ -289,8 +334,10 @@
              },
              "moment[city]": {
                  required: true,
-                 isValidLocation: true,
-                 isLoggedIn: true // TODO: make this less hackey
+                 isValidLocation: true
+             },
+             login: {
+                 isLoggedIn: true
              }
          },
          messages: {
