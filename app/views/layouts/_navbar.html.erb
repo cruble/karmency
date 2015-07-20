@@ -54,23 +54,10 @@
 
 
 
-                <li class="dropdown">
+                <li class="dropdown" id="user-info-dropdown">
                     <% if user_signed_in? %>
-                  <!-- User Logged In Navbar -->
-                    <li class="dropdown active ">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, <%= current_user.first_name%> <i class="fa fa-angle-down"></i></a>
-                        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-                            <li><a href="">My Coins</a></li>
-                            <li><a href="">Create a new coin</a></li>
-                            <li><a href="">My Groups</a></li>
-                            <li><a href="">Create a new group</a></li>
-                            <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
-                            <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-
-
-                        </ul>
-                    </li>
-                    <!-- End User Logged In Navbar -->
+                        <!-- User Logged In Navbar -->
+                        <%= render partial: 'layouts/navbar_user_info' %>
 
                     <% else %>
 

@@ -3,7 +3,7 @@
     <!--sky form -->
     <h3 class="margin20">Tell us about your Karmency transaction!</h3>
 
-    <%= form_for [@coin, @moment], html: {id: "sky-form", class: "sky-form"} do |f| %>
+    <%= form_for [@coin, @moment], html: {id: "sky-form", class: "sky-form"}, remote: true do |f| %>
         <fieldset>
             <section>
                 <div class="inline-group">
@@ -99,6 +99,7 @@
                     </label>
                 </section>
 
+                <!-- hidden field to validate user is logged in -->
                 <input type="hidden" name="login" data-control="myLoginControl">
 
             </div>
@@ -113,7 +114,7 @@
     <!--sky form end here-->
 
     <!-- Test modal -->
-    <div class="modal fade modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade modal-lg" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -149,44 +150,6 @@
             </div>
         </div>
     </div>
-
-    <!-- begin modal form -->
-    <form action="" id="login-form" class="sky-form sky-form-modal">
-        <header>Login form</header>
-
-        <fieldset>
-            <section>
-                <div class="row">
-                    <label class="label col col-4">E-mail</label>
-                    <div class="col col-8">
-                        <label class="input">
-                            <i class="icon-append fa fa-user"></i>
-                            <input type="email" name="email" id="login-email">
-                        </label>
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <div class="row">
-                    <label class="label col col-4">Password</label>
-                    <div class="col col-8">
-                        <label class="input">
-                            <i class="icon-append fa fa-lock"></i>
-                            <input type="password" name="password" id="login-password">
-                        </label>
-                        <div class="note"><a href="#">Not signed up yet? Register</a></div>
-                    </div>
-                </div>
-            </section>
-
-        </fieldset>
-        <footer>
-            <button type="submit" class="button">Log in</button>
-            <a href="#" id="close-login-form" class="button button-secondary modal-closer">Close</a>
-        </footer>
-    </form>
-    <!-- end modal form -->
 </div>
 
 
@@ -195,6 +158,7 @@
 <script src="/sky-form/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="/sky-form/js/jquery.modal.js"></script>
 <script src="/sky-form/js/jquery-ui.min.js"></script>
+<!-- sweet alert js -->
 <script src="/js/sweetalert.min.js"></script>
 
 <script type="text/javascript">
@@ -288,7 +252,7 @@
 
          // handle not logged in
          if (!isSuccess) {
-             $('#myModal').modal('toggle');
+             $('#login-modal').modal('toggle');
          };
 
          return isSuccess;
@@ -361,40 +325,10 @@
          }
      });
 
+     // TODO: set-up ajax registration
+
+     // TODO: set-up ajax login
+
      // TODO: check to see if this is still needed if login form set to remote: true
-     $('#login-form').submit(function(e){
-         e.preventDefault();
-
-         var email = $('#login-email').val();
-         var password = $('#login-password').val();
-         var data = {
-             user: {
-                 email: email,
-                 password: password,
-                 remember_me: 1
-             }
-         };
-
-         $.ajax({ url: '/users/sign_in',
-                  type: 'POST',
-                  dataType: 'JSON',
-                  beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-                  data: data,
-                  success: function(response, status, xhr) {
-                      var csrf_param = xhr.getResponseHeader('X-CSRF-Param');
-                      var csrf_token = xhr.getResponseHeader('X-CSRF-Token');
-
-                      if (csrf_param) {
-                          $('meta[name="csrf-param"]').attr('content', csrf_param);
-                      }
-                      if (csrf_token) {
-                          $('meta[name="csrf-token"]').attr('content', csrf_token);
-                      }
-                      // TODO: check to see if this line is still needed if new moment form set to remote: true
-                      $('input[name="authenticity_token"]').val(csrf_token);
-                      $('#close-login-form').click();
-                  }
-         });
-     });
  });
 </script>

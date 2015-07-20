@@ -31,8 +31,6 @@ class MomentsController < ApplicationController
                             receiver_id: receiver_id
                            )
 
-    redirect_to '/coins/' + @coin.code
-
   end
 
   private
