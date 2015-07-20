@@ -1,0 +1,269 @@
+<div class="col-md-8 margin30 sky-form-columns col-md-offset-2">
+    <div class="divide40"></div>
+    <!--sky form -->
+    <h3 class="margin20">Create a new Karmency Coin!</h3>
+
+    <%= form_for @coin, html: {id: "sky-form", class: "sky-form"}, remote: true do |f| %>
+        <fieldset>
+            <label class="label">Description</label>
+            <section>
+                <label class="textarea">
+                    <%= f.text_area :description, rows: "3", placeholder: "(Optional) This field will show up on your coin's home page. So, you can put something like 'Created by Ms. Smith's 2nd Period Class', if you want" %>
+                </label>
+            </section>
+        </fieldset>
+        <fieldset>
+            <label class="label">Location</label>
+            <div class="row">
+                <section class="col col-6">
+                    <label class="select">
+                        <select name="coin[state]">
+                            <option value="0">State</option>
+                            <option value="NA">Non-U.S.</option>
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="DC">District Of Columbia</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                        </select>
+                        <i></i>
+                    </label>
+                </section>
+
+                <section class="col col-6">
+                    <label class="input">
+                        <input type="text" name="coin[city]" placeholder="City" data-control="myCityControl">
+                    </label>
+                </section>
+
+                <!-- hidden field to validate user is logged in -->
+                <input type="hidden" name="login" data-control="myLoginControl">
+
+            </div>
+        </fieldset>
+        <div class="divide30"></div>
+        <hr>
+        <div class="divide30"></div>
+        <footer class="text-right">
+            <%= f.submit "Submit", class: "btn btn-theme-dark btn-lg" %>
+        </footer>
+    <% end %>
+    <!--sky form end here-->
+
+    <!-- Test modal -->
+    <div class="modal fade modal-lg" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">You must login to create a new coin</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-10 col-sm-offset-1">
+                            <div role="tabpanel">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs text-center" role="tablist">
+                                    <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Register</a></li>
+                                    <li role="presentation" ><a href="#login" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
+
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <!-- register tab begin -->
+                                    <div role="tabpanel" class="tab-pane active" id="profile">
+                                        <%= render "devise/registrations/signup" %>
+                                    </div><!--register tab end-->
+
+                                    <!-- login tab begin -->
+                                    <div role="tabpanel" class="tab-pane" id="login">
+                                        <%= render "/devise/registrations/signin" %>
+                                    </div><!--login tab end-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--sky form plugin js-->
+<script src="/sky-form/js/jquery.form.min.js" type="text/javascript"></script>
+<script src="/sky-form/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="/sky-form/js/jquery.modal.js"></script>
+<script src="/sky-form/js/jquery-ui.min.js"></script>
+<!-- sweet alert js -->
+<script src="/js/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+ $(document).ready(function(){
+     // Retrieve location
+     function getLocation() {
+         if (navigator.geolocation) {
+             navigator.geolocation.getCurrentPosition(lookupPosition);
+         }
+     }
+     function lookupPosition(position) {
+         var data = {
+             lat: position.coords.latitude,
+             lng: position.coords.longitude
+         };
+         $.getJSON('/locations/lookup', data, function(data){
+             $('input[name="coin[city]"]').val(data.city);
+             var abbrev = $( "option:contains('" + data.state + "')" ).val();
+             if (abbrev) {
+                 $("select[name='coin[state]']").val(abbrev);
+             };
+         });
+     }
+     getLocation();
+
+     // Add value not equals validator
+     $.validator.addMethod("valueNotEquals", function(value, element, arg){
+         return arg != value;
+     }, "Value must not equal arg.");
+
+     $.validator.addMethod("isValidLocation", function(value, element, arg){
+         var state = $('option[value=' + $('select[name="coin[state]"]').val() + ']')[0].text;
+         var city = $('input[name="coin[city]"]').val();
+         var isSuccess = false;
+
+         $.ajax({ url: "/locations/validate",
+                  data: {state: state, city: city},
+                  dataType: "json",
+                  async: false,
+                  success:
+                  function(data) {
+                      isSuccess = data.isCity ? true : false
+                  }
+         });
+
+         return isSuccess;
+
+     }, "Must be valid location.");
+
+     // check login status
+     $.validator.addMethod("isLoggedIn", function(value, element, arg){
+         var isSuccess = false;
+
+         // check if user logged in
+         $.ajax({ url: "/login_status",
+                  dataType: "json",
+                  beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                  async: false,
+                  success:
+                  function(data) {
+                      isSuccess = data.loginStatus ? true : false
+                  }
+         });
+
+         // handle not logged in
+         if (!isSuccess) {
+             $('#login-modal').modal('toggle');
+         };
+
+         return isSuccess;
+     }, "");
+
+     // allows validation of hidden fields
+     $.validator.setDefaults({
+         ignore: []
+     });
+
+     // don't validate city field unless submit event, since it requires AJAX call
+     $.validator.defaults.onfocusout = function (element, event) {
+         if ($(element).data("control") === "myCityControl") return;
+         if ($(element).data("control") === "myLoginControl") return;
+         if (!this.checkable(element) && (element.name in this.submitted || !this.optional(element))) {
+             this.element(element);
+         }
+     }
+
+     $.validator.defaults.onkeyup = function (element, event) {
+         if ($(element).data("control") === "myCityControl") return;
+         if ($(element).data("control") === "myLoginControl") return;
+         if (event.which === 9 && this.elementValue(element) === "") {
+             return;
+         }
+         else if (element.name in this.submitted || element === this.lastElement) {
+             this.element(element);
+         }
+     }
+
+     // Validation
+     $("#sky-form").validate({
+         rules: {
+             "coin[state]": {
+                 valueNotEquals: "0"
+             },
+             "coin[city]": {
+                 required: true,
+                 isValidLocation: true
+             },
+             login: {
+                 isLoggedIn: true
+             }
+         },
+         messages: {
+             "coin[state]": {
+                 valueNotEquals: 'Please enter a valid U.S. state or specify "Non-U.S."'
+             },
+             "coin[city]": {
+                 required: "Enter the city where the transaction took place"
+             }
+         },
+         // Do not change code below
+         errorPlacement: function(error, element) {
+             error.insertAfter(element.parent());
+         }
+     });
+ });
+</script>
