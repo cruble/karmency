@@ -1,19 +1,30 @@
 <%= form_for(:user, :url => session_path(:user), :html => {id: "signin-form"}, remote: true, format: :js) do |f| %>
-<div class="form-group">
-  <label for="exampleInputEmail1">Email address</label>
-  <%= f.text_field :email, class: "form-control", placeholder: "Enter email"  %>
-</div>
-<div class="form-group">
-  <label for="exampleInputPassword1">Password</label>
-  <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
-</div>
-<div class="pull-left">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <%= f.text_field :email, class: "form-control", placeholder: "Enter email"  %>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+    </div>
+    <div class="pull-left">
 
-  <p><%= link_to "Forgot your password?", new_password_path(:user) %></p>
+        <p><%= link_to "Forgot your password?", new_password_path(:user) %></p>
 
-</div>
-<div class="pull-right">
-  <%= f.submit 'Login', class: "btn btn-theme-dark" %>
-</div>
-<div class="clearfix"></div>
+    </div>
+    <div class="pull-right">
+        <%= f.submit 'Login', class: "btn btn-theme-dark" %>
+    </div>
+    <div class="clearfix"></div>
 <% end %>
+<br>
+<div class="row social-login">
+    <div class="col-sm-12">
+        <div class="border-rits">
+            <span>or</span>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <button class="btn btn-md btn-facebook"><i class="fa fa-facebook"></i> Login with facebook</button>
+    </div>
+</div>
