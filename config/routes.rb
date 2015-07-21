@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   get '/login_status', to: 'application#login_status'
 
+  get '/users/:id/coins', to: 'users#coins'
+
   root 'application#home'
 
   # The priority is based upon order of creation: first created -> highest priority.

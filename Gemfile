@@ -22,6 +22,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # add geolocation
 gem 'geocoder'
 
+# add pagination library
+gem 'will_paginate', '~> 3.0.6'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

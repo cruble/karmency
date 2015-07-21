@@ -1,0 +1,17 @@
+<tr>
+    <td>
+        <strong><%= link_to "#{coin.code}", coin_path(coin.code) %></strong>
+    </td>
+    <td>
+        <%= coin.creator.formatted_name %>
+    </td>
+    <td>
+        <%= coin.formatted_location %>
+    </td>
+    <td>
+        <%= coin.num_moments %>
+    </td>
+    <td>
+        <%= coin.last_transaction_location %>
+    </td>
+</tr>

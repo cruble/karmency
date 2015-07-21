@@ -3,6 +3,14 @@ class CoinsController < ApplicationController
   def lookup
   end
 
+  def index
+    if params[:my_coins]
+      @coins = current_user.coins
+    else
+      @coins = Coin.all
+    end
+  end
+
   def new
     @coin = Coin.new()
   end
