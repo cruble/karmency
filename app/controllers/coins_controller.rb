@@ -18,6 +18,7 @@ class CoinsController < ApplicationController
   def create
     @coin = Coin.new(coin_params)
     @coin.code = next_code(Coin.last.code)
+    @coin.creator = current_user
     @coin.save
   end
 

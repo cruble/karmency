@@ -5,30 +5,32 @@
         <div class="col-sm-8 margin30">
             <div class="divide10"></div>
             <table class="table table-striped">
-                <tbody><tr>
-                    <th>
-                        Coin
-                    </th>
-                    <th>
-                        Creator
-                    </th>
-                    <th>
-                        Creation location
-                    </th>
-                    <th>
-                        Number of transactions
-                    </th>
-                    <th>
-                        Last transaction location
-                    </th>
-                </tr>
-                <%= render @coins %>
-                </tbody></table><!--cart table end-->
-                <% if @coins.size == 0 %>
+                <tbody>
                     <tr>
-                        &nbsp; Sorry  - there's nothing here because you haven't created, given, or received any coins yet.
+                        <th>
+                            Coin &nbsp; &nbsp;
+                        </th>
+                        <th>
+                            Creator
+                        </th>
+                        <th>
+                            Creation location
+                        </th>
+                        <th style="text-align: center">
+                            # of transactions
+                        </th>
+                        <th>
+                            Last transaction location
+                        </th>
                     </tr>
-                <% end %>
+                    <%= render @coins %>
+                </tbody>
+            </table><!--cart table end-->
+            <% if @coins.size == 0 %>
+                <tr>
+                    &nbsp; Sorry  - there's nothing here because you haven't created, given, or received any coins yet.
+                </tr>
+            <% end %>
         </div>
         <div class="col-md-3 col-md-offset-1 shop-sidebar">
             <div class="sidebar-box margin40">
