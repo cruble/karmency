@@ -25,6 +25,14 @@ gem 'geocoder'
 # add pagination library
 gem 'will_paginate', '~> 3.0.6'
 
+# dotenv for API keys
+gem 'dotenv-rails', :groups => [:development, :test]
+
+# add for facebook integration
+gem 'omniauth-facebook'
+
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

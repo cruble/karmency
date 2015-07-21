@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable
 
+  devise :omniauthable, omniauth_providers: [:facebook]
+
   has_many :groups_users
   has_many :groups, through: :groups_users
   has_many :created_coins, foreign_key: "creator_id", class_name: "Coin"
@@ -33,6 +35,16 @@ class User < ActiveRecord::Base
       end
     else
       "Anonymous"
+    end
+  end
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email || "no_email@example.com" # TODO: consider other strategies here
+      user.password = Devise.friendly_token[0,20]
+      user.first_name = auth.info.name.split(" ").first
+      user.last_name = auth.info.name.split(" ").last   # assuming the user model has a name
+      user.image_url = auth.info.image # assuming the user model has an image
     end
   end
 

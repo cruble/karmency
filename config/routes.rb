@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :moments
   end
 
-  devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions'}
+  devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions', :omniauth_callbacks => "users/omniauth_callbacks"}
 
   get 'locations/validate', to: 'locations#validate'
   get 'locations/lookup', to: 'locations#lookup'

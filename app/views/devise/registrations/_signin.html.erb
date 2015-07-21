@@ -15,16 +15,15 @@
     <div class="pull-right">
         <%= f.submit 'Login', class: "btn btn-theme-dark" %>
     </div>
-    <div class="clearfix"></div>
 <% end %>
-<br>
-<div class="row social-login">
+<div class="clearfix"></div>
+<div class="row social-login col-sm-12">
     <div class="col-sm-12">
         <div class="border-rits">
             <span>or</span>
         </div>
     </div>
     <div class="col-sm-12">
-        <button class="btn btn-md btn-facebook"><i class="fa fa-facebook"></i> Login with facebook</button>
+        <a href="<%= user_omniauth_authorize_path(:facebook) %>" class="btn btn-md btn-facebook center-block"><i class="fa fa-facebook"></i> Login with facebook</a>
     </div>
 </div>
