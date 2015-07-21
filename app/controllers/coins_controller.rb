@@ -45,7 +45,13 @@ class CoinsController < ApplicationController
   end
 
   def next_code(last_code)
+    # create hex alphabet
     values = ("A".."Z").to_a + ("0".."9").to_a
+
+    # delete problematic characters
+    values.delete("I") # I because it looks like 1 and is too left aligned
+    values.delete("O") # O because it looks like 0
+
     updated = false
     next_code = []
     last_code.split(//).reverse.each_with_index { |digit, index|
