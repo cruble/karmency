@@ -98,7 +98,7 @@
     <!--sky form end here-->
 
     <!-- Login modal -->
-    <div class="modal fade modal-lg" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade modal-lg" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  style="width: 100%">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -143,29 +143,47 @@
 <script src="/sky-form/js/jquery-ui.min.js"></script>
 <!-- sweet alert js -->
 <script src="/js/sweetalert.min.js"></script>
+<!-- jQuery cookies -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
 
 <script type="text/javascript">
  $(document).ready(function(){
-     // Retrieve location
-     function getLocation() {
-         if (navigator.geolocation) {
-             navigator.geolocation.getCurrentPosition(lookupPosition);
+     // Load description from cookies if available
+     var description = $.cookie("coinDescription");
+     if (description) {
+         $('textarea[name="coin[description]"]').val(description);
+     }
+
+     // Load location if stored in cookies
+     var state = $.cookie("coinState");
+     var city = $.cookie("coinCity");
+
+     if (state && city) {
+         $('input[name="coin[city]"]').val(city);
+         $("select[name='coin[state]']").val(state);
+     } else {
+         // Retrieve location
+         function getLocation() {
+             if (navigator.geolocation) {
+                 navigator.geolocation.getCurrentPosition(lookupPosition);
+             }
          }
-     }
-     function lookupPosition(position) {
-         var data = {
-             lat: position.coords.latitude,
-             lng: position.coords.longitude
-         };
-         $.getJSON('/locations/lookup', data, function(data){
-             $('input[name="coin[city]"]').val(data.city);
-             var abbrev = $( "option:contains('" + data.state + "')" ).val();
-             if (abbrev) {
-                 $("select[name='coin[state]']").val(abbrev);
+         function lookupPosition(position) {
+             var data = {
+                 lat: position.coords.latitude,
+                 lng: position.coords.longitude
              };
-         });
-     }
-     getLocation();
+             $.getJSON('/locations/lookup', data, function(data){
+                 $('input[name="coin[city]"]').val(data.city);
+                 var abbrev = $( "option:contains('" + data.state + "')" ).val();
+                 if (abbrev) {
+                     $("select[name='coin[state]']").val(abbrev);
+                 };
+             });
+         }
+         getLocation();
+     };
 
      // Add value not equals validator
      $.validator.addMethod("valueNotEquals", function(value, element, arg){
@@ -193,6 +211,15 @@
 
      // check login status
      $.validator.addMethod("isLoggedIn", function(value, element, arg){
+
+         // set cookies in case user leaves to log in - these are cleared when a coin is successfully created
+         var description = $('textarea[name="coin[description]"]').val();
+         var state = $('select[name="coin[state]"]').val();
+         var city = $('input[name="coin[city]"]').val();
+         $.cookie("coinDescription", description);
+         $.cookie("coinState", state);
+         $.cookie("coinCity", city);
+
          var isSuccess = false;
 
          // check if user logged in
@@ -209,6 +236,13 @@
          // handle not logged in
          if (!isSuccess) {
              $('#login-modal').modal('toggle');
+         };
+
+         // clear cookies if successful
+         if (isSuccess) {
+             $.removeCookie("momentDescription");
+             $.removeCookie("momentState");
+             $.removeCookie("momentCity");
          };
 
          return isSuccess;
@@ -258,7 +292,7 @@
                  valueNotEquals: 'Please enter a valid U.S. state or specify "Non-U.S."'
              },
              "coin[city]": {
-                 required: "Enter the city where the transaction took place"
+                 required: "Enter your city, where the coin will be 'minted'"
              }
          },
          // Do not change code below

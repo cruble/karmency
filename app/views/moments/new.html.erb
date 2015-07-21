@@ -113,8 +113,8 @@
     <% end %>
     <!--sky form end here-->
 
-    <!-- Test modal -->
-    <div class="modal fade modal-lg" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <!-- Login modal TODO: make a partial -->
+    <div class="modal fade modal-lg" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="width: 100%">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -132,7 +132,7 @@
 
                                 </ul>
                                 <!-- Tab panes -->
-                                <div class="tab-content">
+                                <div class="tab-content" style="margin-top: 20px">
                                     <!-- register tab begin -->
                                     <div role="tabpanel" class="tab-pane active" id="profile">
                                         <%= render "devise/registrations/signup" %>
@@ -160,53 +160,77 @@
 <script src="/sky-form/js/jquery-ui.min.js"></script>
 <!-- sweet alert js -->
 <script src="/js/sweetalert.min.js"></script>
+<!-- jQuery cookies -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
 <script type="text/javascript">
  $(document).ready(function(){
-     // Retrieve location
-     function getLocation() {
-         if (navigator.geolocation) {
-             navigator.geolocation.getCurrentPosition(lookupPosition);
-         }
+     // Load description from cookies if available
+     var description = $.cookie("momentDescription");
+     if (description) {
+         $('textarea[name="moment[description]"]').val(description);
      }
-     function lookupPosition(position) {
-         var data = {
-             lat: position.coords.latitude,
-             lng: position.coords.longitude
-         };
-         $.getJSON('/locations/lookup', data, function(data){
-             $('input[name="moment[city]"]').val(data.city);
-             var abbrev = $( "option:contains('" + data.state + "')" ).val();
-             if (abbrev) {
-                 $("select[name='moment[state]']").val(abbrev);
+
+     // Load date from cookies if available
+     var date = $.cookie("momentDate");
+     if (date) {
+         $('#date').val(date);
+     } else {
+         // pre-populate date
+         function autoFillDate() {
+             var today = new Date();
+             var dd = today.getDate();
+             var mm = today.getMonth()+1; //January is 0!
+             var yy = today.getFullYear()-2000;
+
+             if(dd<10) {
+                 dd='0'+dd
+             }
+
+             if(mm<10) {
+                 mm='0'+mm
+             }
+
+             today = mm+'/'+dd+'/'+yy;
+             $('#date').val(today);
+         }
+         autoFillDate();
+     }
+
+     // Load location if stored in cookies
+     var state = $.cookie("momentState");
+     var city = $.cookie("momentCity");
+
+     if (state && city) {
+         $('input[name="moment[city]"]').val(city);
+         $("select[name='moment[state]']").val(state);
+     } else {
+         // Retrieve location
+         function getLocation() {
+             if (navigator.geolocation) {
+                 navigator.geolocation.getCurrentPosition(lookupPosition);
+             }
+         }
+         function lookupPosition(position) {
+             var data = {
+                 lat: position.coords.latitude,
+                 lng: position.coords.longitude
              };
-         });
-     }
-     getLocation();
-
-     // pre-populate date
-     function autoFillDate() {
-         var today = new Date();
-         var dd = today.getDate();
-         var mm = today.getMonth()+1; //January is 0!
-         var yy = today.getFullYear()-2000;
-
-         if(dd<10) {
-             dd='0'+dd
+             $.getJSON('/locations/lookup', data, function(data){
+                 $('input[name="moment[city]"]').val(data.city);
+                 var abbrev = $( "option:contains('" + data.state + "')" ).val();
+                 if (abbrev) {
+                     $("select[name='moment[state]']").val(abbrev);
+                 };
+             });
          }
+         getLocation();
+     };
 
-         if(mm<10) {
-             mm='0'+mm
-         }
-
-         today = mm+'/'+dd+'/'+yy;
-         $('#date').val(today);
-     }
-     autoFillDate();
 
      // Datepicker
      $('#date').datepicker({
-         dateFormat: 'dd/mm/yy',
+         dateFormat: 'mm/dd/yy',
          prevText: '<i class="fa fa-chevron-left"></i>',
          nextText: '<i class="fa fa-chevron-right"></i>'
      });
@@ -237,6 +261,16 @@
 
      // check login status
      $.validator.addMethod("isLoggedIn", function(value, element, arg){
+         // set cookies in case user leaves to log in - these are cleared when a moment is successfully created
+         var description = $('textarea[name="moment[description]"]').val();
+         var date = $('#date').val();
+         var state = $('select[name="moment[state]"]').val();
+         var city = $('input[name="moment[city]"]').val();
+         $.cookie("momentDescription", description);
+         $.cookie("momentDate", date);
+         $.cookie("momentState", state);
+         $.cookie("momentCity", city);
+
          var isSuccess = false;
 
          // check if user logged in
@@ -253,6 +287,14 @@
          // handle not logged in
          if (!isSuccess) {
              $('#login-modal').modal('toggle');
+         };
+
+         // clear cookies if successful
+         if (isSuccess) {
+             $.removeCookie("momentDescription");
+             $.removeCookie("momentDate");
+             $.removeCookie("momentState");
+             $.removeCookie("momentCity");
          };
 
          return isSuccess;
