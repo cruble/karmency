@@ -16,6 +16,9 @@
         <div class="col-md-4 margin30">
             <h3 class="heading">Coin &nbsp; <%= @coin.code %></h3>
             <div class="item-img-wrap" id="coinThreeJS">
+                <div class="spinner-loader" style="margin-top: 30%; margin-bottom: 30%">
+                    Loading…
+                </div>
             </div>
             <p style="text-align: center">click and drag to spin coin<br>
                 <% if current_user == @coin.creator %>
@@ -29,14 +32,21 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
-                                Collapsible Group Item #1
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="collapsed" id="creation-details-accordion">
+                                Creation details
                             </a>
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                         <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            <ul>
+                                <li>Created by: <%= @coin.creator.formatted_name %></li>
+                                <li>Created on: <%= @coin.formatted_date %></li>
+                                <li>Created in: <%= @coin.formatted_location %></li>
+                                <% if @coin.description %>
+                                    <li>Description: <%= @coin.description %></li>
+                                <% end %>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -44,13 +54,18 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="false">
-                                Collapsible Group Item #2
+                                Transactions summary
                             </a>
                         </h4>
                     </div>
                     <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false">
                         <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            <ul>
+                                <li>Number of transactions: <%= @coin.moments.size %></li>
+                                <li>Last transaction date: </li>
+                                <li>Last received by: </li>
+                                <li>Average time between transactions: </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -58,13 +73,19 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
-                                Collapsible Group Item #3
+                                Geography summary
                             </a>
                         </h4>
                     </div>
                     <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false">
                         <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            <ul>
+                                <li>Last transaction location: </li>
+                                <li>Longest distance from creation: </li>
+                                <li>Number states visited: </li>
+                                <li>Most common state: </li>
+                                <li>Number of cities visited: </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -72,27 +93,13 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="collapsed" aria-expanded="false">
-                                Collapsible Group Item #4
+                                Transactions map
                             </a>
                         </h4>
                     </div>
                     <div id="collapseFour" class="panel-collapse collapse" aria-expanded="false">
                         <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive" class="collapsed" aria-expanded="false">
-                                Collapsible Group Item #5
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseFive" class="panel-collapse collapse" aria-expanded="false">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            - Placeholder for map -
                         </div>
                     </div>
                 </div>
@@ -136,6 +143,9 @@
 
 <script>
  $(document).ready(function(){
+
+     // uncollapse creation details
+     $('#creation-details-accordion').click();
 
      // Define function to initialize ThreeJS scene
      var init3d = function(){
@@ -201,7 +211,7 @@
              font: 'helvetiker',
              weight: 'bold'
          });
-         textGeomA.applyMatrix( new THREE.Matrix4().makeTranslation(-13, -4.5, -0.3) );
+         textGeomA.applyMatrix( new THREE.Matrix4().makeTranslation(-13, -4, -0.3) );
 
          // generate hex code geometry 1
          var textGeomB = new THREE.TextGeometry("<%= @coin.code[1] %>", {
@@ -210,7 +220,7 @@
              font: 'helvetiker',
              weight: 'bold'
          });
-         textGeomB.applyMatrix( new THREE.Matrix4().makeTranslation(-5.5, -4.5, -0.3) );
+         textGeomB.applyMatrix( new THREE.Matrix4().makeTranslation(-5.5, -4, -0.3) );
 
          // generate hex code geometry 1
          var textGeomC = new THREE.TextGeometry("<%= @coin.code[2] %>", {
@@ -219,7 +229,7 @@
              font: 'helvetiker',
              weight: 'bold'
          });
-         textGeomC.applyMatrix( new THREE.Matrix4().makeTranslation(1, -4.5, -0.3) );
+         textGeomC.applyMatrix( new THREE.Matrix4().makeTranslation(1, -4, -0.3) );
 
          // generate hex code geometry 1
          var textGeomD = new THREE.TextGeometry("<%= @coin.code[3] %>", {
@@ -228,7 +238,7 @@
              font: 'helvetiker',
              weight: 'bold'
          });
-         textGeomD.applyMatrix( new THREE.Matrix4().makeTranslation(7.5, -4.5, -0.3) );
+         textGeomD.applyMatrix( new THREE.Matrix4().makeTranslation(7.5, -4, -0.3) );
 
          loader.load( '/parker-additions/stl/karma-coin-1.stl', function ( bufferGeometry ) {
              var geometry = new THREE.Geometry().fromBufferGeometry( bufferGeometry );
@@ -243,6 +253,9 @@
                  specular: 0x000044,
                  shininess: 200
              });
+
+             // copy coinMesh for printing
+             var coinForPrinting = new THREE.Mesh( geometry, material );
 
              // adjust merged coin
              geometry.applyMatrix( new THREE.Matrix4().makeTranslation(0, 0, -0.75) );
@@ -259,7 +272,7 @@
              group.add( coinMesh );
 
              $('#download-stl').click(function(){
-                 saveSTL( scene, 'karmency-coin-<%= @coin.code %>' );
+                 saveSTL( coinForPrinting, 'karmency-coin-<%= @coin.code %>' );
              });
          });
      }
@@ -363,6 +376,7 @@
      var container = document.getElementById( 'coinThreeJS' );
 
      init3d();
+     $(container).empty();
      container.appendChild( renderer.domElement );
 
      document.addEventListener( 'mousedown', onDocumentMouseDown, false );

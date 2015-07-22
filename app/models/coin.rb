@@ -27,4 +27,25 @@ class Coin < ActiveRecord::Base
     end
   end
 
+  def formatted_date
+    "#{created_at.strftime("%B")} #{created_at.day}, #{created_at.year}"
+  end
+
+  def avg_trans_time
+    total_time = 0
+    moments.reverse.inject(moments.last) do |memo, moment|
+      unless memo == moment
+        total_time += memo.date - moment.date
+        memo = moment
+      end
+      memo
+    end
+
+    if moments.size > 0
+      "#{(total_time / (moments.size - 1)).to_i} days"
+    else
+      "N/A"
+    end
+  end
+
 end
