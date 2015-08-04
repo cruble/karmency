@@ -379,9 +379,9 @@
      $(container).empty();
      container.appendChild( renderer.domElement );
 
-     document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-     document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-     document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+     container.addEventListener( 'mousedown', onDocumentMouseDown, false );
+     container.addEventListener( 'touchstart', onDocumentTouchStart, false );
+     container.addEventListener( 'touchmove', onDocumentTouchMove, false );
      window.addEventListener( 'resize', onWindowResize, false );
 
      animate();
