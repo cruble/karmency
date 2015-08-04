@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def home
+    @coins = Coin.count
+    @transactions = Moment.count
+    @cities = Moment.select(:city).count
+    @states = Moment.select(:state).count
   end
 
   def login_status
