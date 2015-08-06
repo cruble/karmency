@@ -3,11 +3,19 @@ class Moment < ActiveRecord::Base
   belongs_to :receiver, :class_name => "User"
   belongs_to :giver, :class_name => "User"
 
-  def receiver_name
-    if receiver
-      receiver.formatted_name
+  def name(giver_receiver)
+    if giver_receiver == :receiver
+      if receiver
+        receiver.formatted_name
+      else
+        "Anonymous"
+      end
     else
-      "Anonymous"
+      if giver
+        giver.formatted_name
+      else
+        "Anonymous"
+      end
     end
   end
 
@@ -15,13 +23,23 @@ class Moment < ActiveRecord::Base
     "#{month} #{day}, #{year}"
   end
 
-  def image_url
-    if receiver && receiver.image_url
-      receiver.image_url
-    elsif receiver
-      "/img/default_face.png"
+  def image_url(giver_receiver)
+    if giver_receiver == :receiver
+      if receiver && receiver.image_url
+        receiver.image_url
+      elsif receiver
+        "/img/default_face.png"
+      else
+        "/img/anonymous_face.jpg"
+      end
     else
-      "/img/anonymous_face.jpg"
+      if giver && giver.image_url
+        giver.image_url
+      elsif giver
+        "/img/default_face.png"
+      else
+        "/img/anonymous_face.jpg"
+      end
     end
   end
 

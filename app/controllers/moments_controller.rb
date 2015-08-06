@@ -22,15 +22,36 @@ class MomentsController < ApplicationController
     @coin = Coin.find(params['coin_id'])
 
     @moment = Moment.create(
-                            coin_id: @coin.id,
-                            description: moment_params['description'],
-                            date: date,
-                            state: moment_params['state'],
-                            city: moment_params['city'],
-                            giver_id: giver_id,
-                            receiver_id: receiver_id
-                           )
+      coin_id: @coin.id,
+      description: moment_params['description'],
+      date: date,
+      state: moment_params['state'],
+      city: moment_params['city'],
+      giver_id: giver_id,
+      receiver_id: receiver_id
+    )
 
+  end
+
+  def edit
+    # lookup relevant moment
+    @moment = Moment.find(params[:id])
+
+    # get user if relevant
+    if @user = current_user
+    # check if moment needs giver / receiver
+      if !@moment.giver
+        @moment.giver = @user
+        @response = @moment.save || "error - giver not added"
+      elsif !@moment.receiver
+        @moment.receiver = @user
+        @response = @moment.save || "error - receiver not added"
+      else
+        @response = "error - already has giver and receiver"
+      end
+    else
+      @response = "not logged in"
+    end
   end
 
   private
