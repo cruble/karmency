@@ -1,9 +1,56 @@
 <div class="timeline-panel wow animated fadeInUp animated" style="visibility: visible; animation-name: fadeInUp; -webkit-animation-name: fadeInUp;">
     <div class="timeline-body" style="text-align: center">
         <h2>
-            <!-- image to be replaced here -->
-            <img src="<%= moment.image_url %>" class="img-circle" width="70px" height="70px" style="margin-left: auto; margin-right: auto; display: block;">
-            <a href="#">Recipient: <%= moment.receiver_name %></a>
+            <!-- Giver/Receiver heading -->
+            <div class="timeline-heading giver-receiver-heading">
+                <!-- Giver -->
+                <div class="col-xs-5" style="height: 100%">
+                    <% if !moment.giver %>
+                        <a href="<%= edit_coin_moment_path(@coin, moment) %>" data-remote=true>
+                    <% end %>
+                    <img height="80px" width="80px" class="giver-receiver-thumb img-circle" src="<%= moment.image_url(:giver) %>" <%= 'data-toggle="tooltip" data-original-title="Was this you? Click to be added to this transaction."'.html_safe if !moment.giver %>>
+                    <% if !moment.giver %>
+                        </a>
+                    <% end %>
+                    <p class="giver-receiver-text">
+                        <% if !moment.giver %>
+                            <a href="<%= edit_coin_moment_path(@coin, moment)  %>" data-remote=true <%= 'data-toggle="tooltip" data-original-title="Was this you? Click to be added to this transaction."'.html_safe if !moment.giver %>>
+                        <% end %>
+                        <strong><%= moment.name(:giver) %></strong>
+                        <% if !moment.giver %>
+                            </a>
+                        <% end %>
+                        <br>
+                        Giver
+                    </p>
+                </div>
+                <!-- Arrow -->
+                <div class="col-xs-2 giver-receiver-arrow">
+                    <i class="fa fa-arrow-right"></i>
+                </div>
+                <!-- Receiver -->
+                <div class="col-xs-5" style="height: 100%">
+                    <% if !moment.receiver %>
+                        <a href="<%= edit_coin_moment_path(@coin, moment) %>" data-remote=true>
+                    <% end %>
+                    <img height="80px" width="80px" class="giver-receiver-thumb img-circle" src="<%= moment.image_url(:receiver) %>" <%= 'data-toggle="tooltip" data-original-title="Was this you? Click to be added to this transaction."'.html_safe if !moment.receiver %>>
+                    <% if !moment.receiver %>
+                        </a>
+                    <% end %>
+                    <p class="giver-receiver-text" style="text-align: center; margin-top: 10px;">
+                        <% if !moment.receiver %>
+                            <a href="<%= edit_coin_moment_path(@coin, moment) %>" data-remote=true <%= 'data-toggle="tooltip" data-original-title="Was this you? Click to be added to this transaction."'.html_safe if !moment.receiver %>>
+                        <% end %>
+                        <strong><%= moment.name(:receiver) %></strong>
+                        <% if !moment.receiver %>
+                            </a>
+                        <% end %>
+                        <br>
+                        Receiver
+                    </p>
+                </div>
+            </div>
+
 
             <ul class="list-inline post-detail" style="text-align: left">
                 <li><i class="fa fa-calendar"></i><%= moment.formatted_date %></li>

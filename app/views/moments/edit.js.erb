@@ -1,0 +1,19 @@
+<% if @response == "not logged in" %>
+$('#login-modal').modal('toggle');
+<% elsif @response == true %>
+swal({
+    title: "Success",
+    text: "You were added to the transaction",
+    type: "success"},
+     function(){
+         location.reload();
+     });
+<% else %>
+swal({
+    title: "Uh-oh",
+    text: "Something went wrong. Try again, maybe?",
+    type: "error"},
+     function(){
+         location.reload();
+     });
+<% end %>

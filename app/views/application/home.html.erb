@@ -3,7 +3,7 @@
     <div class="tp-banner">
         <ul>
             <!-- SLIDE -->
-            <li data-transition="fade" data-slotamount="5" data-masterspeed="1500" data-title="Powerful Theme">
+            <li data-transition="fade" data-slotamount="5" data-masterspeed="1500" data-title="Karmency">
                 <!-- MAIN IMAGE -->
                 <img src="/img/bg-3.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
                 <div class="caption title-2 sft"
@@ -45,7 +45,7 @@
 
             </li>
             <!-- SLIDE -->
-            <li data-transition="fade" data-slotamount="5" data-masterspeed="1500" data-title="Unique Theme">
+            <li data-transition="fade" data-slotamount="5" data-masterspeed="1500" data-title="Track coins">
                 <!-- MAIN IMAGE -->
                 <img src="/img/bg-4.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
 
@@ -92,7 +92,7 @@
                 </div>
             </li>
             <!-- SLIDE -->
-            <li data-transition="fade" data-slotamount="5" data-masterspeed="1500" data-title="Multipurpose">
+            <li data-transition="fade" data-slotamount="5" data-masterspeed="1500" data-title="Print your own">
                 <!-- MAIN IMAGE -->
                 <img src="/img/bg-1.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
                 <!-- LAYER NR. 1 -->
@@ -218,7 +218,7 @@
             </div>
         </div><!--colored boxed col end-->
         <div class="col-md-4 col-sm-6 margin30">
-            <div class="colored-boxed dark">
+            <div class="colored-boxed green">
                 <i class="fa fa-bar-chart"></i>
                 <h3>View coin stats</h3>
                 <span class="center-line"></span>
@@ -229,7 +229,7 @@
             </div>
         </div><!--colored boxed col end-->
         <div class="col-md-4 col-sm-6 margin30">
-            <div class="colored-boxed blue">
+            <div class="colored-boxed green">
                 <i class="fa fa-print"></i>
                 <h3>3D print coins</h3>
                 <span class="center-line"></span>
@@ -245,81 +245,26 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 margin20 facts-in">
-                <h3><span class="counter">10</span> +</h3>
+                <h3><span class="counter"><%= @coins %></span></h3>
                 <h4>Coins printed</h4>
             </div><!--facts in-->
             <div class="col-md-3 margin20 facts-in">
-                <h3><span class="counter">10</span></h3>
+                <h3><span class="counter"><%= @transactions %></span></h3>
                 <h4>Transactions</h4>
             </div><!--facts in-->
             <div class="col-md-3 margin20 facts-in">
-                <h3><span class="counter">10</span> +</h3>
+                <h3><span class="counter"><%= @cities %></span></h3>
                 <h4>Cities</h4>
             </div><!--facts in-->
             <div class="col-md-3 margin20 facts-in">
-                <h3><span class="counter">10</span></h3>
-                <h4>States and territories</h4>
+                <h3><span class="counter"><%= @states %></span></h3>
+                <h4>States</h4>
             </div><!--facts in-->
         </div>
     </div>
-    <a name="what"></a>
+    <a name="who"></a>
 </section><!--fun facts-->
 
-<div class="testimonials-v-2 wow animated fadeInUp" data-wow-duration="700ms" data-wow-delay="100ms">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
-                <div class="center-heading">
-                    <h2>What people are saying</h2>
-                    <p>Tweet <strong><a href="#">@givekarmency</a></strong> to tell us what you think!</p>
-                    <span class="center-line"></span>
-
-                </div>
-            </div>
-        </div><!--center heading end-->
-
-        <div class="row">
-
-            <div class="col-sm-8 col-sm-offset-2">
-                <div class="testi-slide">
-                    <ul class="slides">
-                        <li>
-                            <img src="/img/customer-1.jpg" alt="">
-                            <p>
-                                <i class="ion-quote"></i>
-                                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.
-                            </p>
-                            <h4 class="test-author">
-                                Rick man - <em>rock inc</em>
-                            </h4>
-                        </li><!--testi item-->
-                        <li>
-                            <img src="/img/customer-2.jpg" alt="">
-                            <p>
-                                <i class="ion-quote"></i>
-                                Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years </p>
-                            <h4 class="test-author">
-                                Jellia - <em>Founder of tinka inc</em>
-                            </h4>
-                        </li><!--testi item-->
-                        <li>
-                            <img src="/img/customer-3.jpg" alt="">
-                            <p>
-                                <i class="ion-quote"></i>
-                                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor.</p>
-                            <h4 class="test-author">
-                                Smith - <em>Ceo, company inc.</em>
-                            </h4>
-                        </li><!--testi item-->
-                    </ul>
-                </div><!--flex slider testimonials end here-->
-            </div>
-        </div><!--testi slider row end-->
-
-    </div>
-    <a name="who"></a>
-</div><!--testimonials v-2 end-->
-<div class="divide40"></div>
 <div class="our-team-v-2">
     <div class="container">
         <div class="row">
@@ -343,7 +288,7 @@
                     <img src="/img/team-5.jpg" class="img-responsive" alt="">
                     <div class="person-desc-v2">
                         <h3>Chad Ruble</h3>
-                        <em>Dude</em>
+                        <!-- <em>Dude</em> -->
                         <ul class="list-inline top-social">
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -356,16 +301,14 @@
             </div><!--person col end-->
             <div class="col-sm-3 text-center">
                 <div class="person-v2">
-                    <img src="/img/team-6.jpg" class="img-responsive" alt="">
+                    <img src="/img/parker.jpg" class="img-responsive" alt="">
                     <div class="person-desc-v2">
                         <h3>Parker Lawrence</h3>
-                        <em>Other dude</em>
+                        <!-- <em>Other dude</em> -->
                         <ul class="list-inline top-social">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <!--                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>-->
+                            <li><a href="https://github.com/parkeristyping"><i class="fa fa-github"></i></a></li>
+                            <li><a href="http://www.hereisahand.com/"><i class="fa fa-hand-o-up"></i></a></li>
+                            <li><a href="https://twitter.com/parkeristyping"><i class="fa fa-twitter"></i></a></li>
                         </ul>
                     </div>
                 </div>
