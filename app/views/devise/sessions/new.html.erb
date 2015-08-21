@@ -1,31 +1,32 @@
-<div class="well col-md-10 col-md-offset-1">
-<div class="form-group">
-    <h2>Log in</h2>
-  </div>
+<div class="divide60"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div role="tabpanel">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs text-center" role="tablist">
+                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Register</a></li>
+                    <li role="presentation" class="active"><a href="#login" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+                </ul>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+                <!-- Tab panes -->
+                <div class="tab-content" style="margin-top: 20px;">
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+                    <!-- register tab begin -->
+                    <div role="tabpanel" class="tab-pane" id="profile">
+                        <%= render "devise/shared/signup" %>
+                    </div><!--register tab end-->
+
+                    <!-- login tab begin -->
+                    <div role="tabpanel" class="tab-pane active" id="login">
+                        <%= render "devise/shared/signin" %>
+                    </div><!--login tab end-->
+
+                </div>
+
+            </div>
+        </div>
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
-
 </div>
+<div class="divide80"></div>
