@@ -16,11 +16,15 @@
           <% else %>
           .
         <% end %> 
-      </p>  
+      </p> 
+      <% if @coin.moments.last.description %>
+        <p>
+          The Karmic moment was described as: <br><i> "<%=@coin.moments.last.description%>"</i>
+        </p> 
+      <% end %>
       <p>
         This coin has now had <%=@coin.num_moments %> transactions in total. 
       </p>
-
       <p>
         Please visit <a href="http:www.karmency.org">Karmency.org</a> for more information about your Karmency. 
       </p>

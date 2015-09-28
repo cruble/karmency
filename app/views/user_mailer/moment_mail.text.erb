@@ -1,9 +1,20 @@
-Welcome to example.com, <%= @user.first_name %>
-===============================================
- 
-You have successfully signed up to example.com,
-your username is: <%= @user.first_name %>.
- 
-To login to the site, just follow this link: <%= @url %>.
- 
-Thanks for joining and have a great day!
+** Hello <%= @user.first_name %>!
+------------------------------------------------------------
+
+One of your Karmency coins has registered a new exchange!
+
+The exchange took place on <%=@coin.moments.last.date%> <% if @coin.last_transaction_location %> at <%=@coin.last_transaction_location %>. <% else %> . <% end %>
+<% if @coin.moments.last.description %>
+
+The Karmic moment was described as:
+"<%=@coin.moments.last.description%>"
+<% end %>
+
+This coin has now had <%=@coin.num_moments %> transactions in total.
+
+Please visit Karmency.org (http:www.karmency.org) for more information about your Karmency.
+
+Thanks for being part of the Karmency community and this social experiment in recognizing and tracking good deeds. We hope you are having a good day!
+
+Parker and Chad
+The Karmency Team
