@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721010011) do
+ActiveRecord::Schema.define(version: 20150926165510) do
+
+  create_table "coin_alerts", force: :cascade do |t|
+    t.integer  "coin_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean  "status"
+  end
+
+  add_index "coin_alerts", ["coin_id"], name: "index_coin_alerts_on_coin_id"
+  add_index "coin_alerts", ["user_id"], name: "index_coin_alerts_on_user_id"
 
   create_table "coins", force: :cascade do |t|
     t.string   "creation_location"
@@ -23,6 +34,16 @@ ActiveRecord::Schema.define(version: 20150721010011) do
     t.string   "state"
     t.string   "description"
   end
+
+  create_table "create_coin_alerts", force: :cascade do |t|
+    t.integer  "coin_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "create_coin_alerts", ["coin_id"], name: "index_create_coin_alerts_on_coin_id"
+  add_index "create_coin_alerts", ["user_id"], name: "index_create_coin_alerts_on_user_id"
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
@@ -47,10 +68,11 @@ ActiveRecord::Schema.define(version: 20150721010011) do
     t.string   "state"
     t.string   "location"
     t.string   "photo_url"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "receiver_id"
     t.integer  "giver_id"
+    t.boolean  "alert_status"
   end
 
   add_index "moments", ["coin_id"], name: "index_moments_on_coin_id"

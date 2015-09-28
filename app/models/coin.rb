@@ -4,6 +4,7 @@ class Coin < ActiveRecord::Base
   has_many :moments
   has_many :receivers, through: :moments, class_name: "User"
   has_many :givers, through: :moments, class_name: "User"
+  has_many :coin_alerts
 
   def formatted_location
     if !city || !state
