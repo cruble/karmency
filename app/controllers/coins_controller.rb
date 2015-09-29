@@ -6,6 +6,7 @@ class CoinsController < ApplicationController
   def index
     if params[:my_coins]
       @coins = current_user.coins
+      binding.pry 
     else
       @coins = Coin.all
     end

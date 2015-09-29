@@ -2,6 +2,7 @@ class Moment < ActiveRecord::Base
   belongs_to :coin
   belongs_to :receiver, :class_name => "User"
   belongs_to :giver, :class_name => "User"
+  belongs_to :creator, :class_name => "User"
 
   def name(giver_receiver)
     if giver_receiver == :receiver
