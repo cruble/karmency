@@ -53,11 +53,16 @@ class Coin < ActiveRecord::Base
 
   def user_alert_status(current_user)
     coin_alert = CoinAlert.where(coin_id: self.id, user_id: current_user.id)
-    if coin_alert.last.status == true
-      "On"
+    if coin_alert
+      if coin_alert.last.status == true
+       "On"
       else
-      "Off"
-    end 
+       "Off"
+      end
+    end
+
+
+ 
   end 
 
   def last_coin_alert(current_user)
