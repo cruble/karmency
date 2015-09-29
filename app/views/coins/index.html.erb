@@ -22,10 +22,13 @@
                         <th>
                             Last transaction location
                         </th>
+
+                       <% if user_signed_in? %>
                         <th>
                             Alerts<br>
                             (Toggle on/off)
                         </th>
+                        <% end %>
                     </tr>
                     <%= render @coins %>
 
