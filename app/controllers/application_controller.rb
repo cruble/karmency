@@ -30,4 +30,8 @@ class ApplicationController < ActionController::Base
     request.referrer
   end
 
+  def alert_link_text(alert)  
+    alert.status? ? 'Off' : 'On'  
+  end  
+
 end

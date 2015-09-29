@@ -5,6 +5,8 @@ class Coin < ActiveRecord::Base
   has_many :receivers, through: :moments, class_name: "User"
   has_many :givers, through: :moments, class_name: "User"
   has_many :coin_alerts
+  accepts_nested_attributes_for :coin_alerts, allow_destroy: true
+
 
   def formatted_location
     if !city || !state
@@ -48,5 +50,25 @@ class Coin < ActiveRecord::Base
       "N/A"
     end
   end
+
+  def user_alert_status(current_user)
+    coin_alert = CoinAlert.where(coin_id: self.id, user_id: current_user.id)
+    if coin_alert.last.status == true
+      "On"
+      else
+      "Off"
+    end 
+  end 
+
+  def last_coin_alert(current_user)
+    coin_alerts = CoinAlert.where(coin_id: self.id, user_id: current_user.id)
+    coin_alerts.last
+  end 
+
+  def toggle_alert_status(current_user)
+    coin_alerts = CoinAlert.where(coin_id: self.id, user_id: current_user.id)
+    coin_alerts.last.toggle!(:status)
+  end 
+
 
 end

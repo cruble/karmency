@@ -3,7 +3,7 @@
 
 One of your Karmency coins has registered a new exchange!
 
-The exchange took place on <%=@coin.moments.last.date%> <% if @coin.last_transaction_location %> at <%=@coin.last_transaction_location %>. <% else %> . <% end %>
+The exchange took place on <%=@coin.moments.last.date%> <% if @coin.last_transaction_location %> in <%=@coin.last_transaction_location %>. <% else %> . <% end %>
 <% if @coin.moments.last.description %>
 
 The Karmic moment was described as:

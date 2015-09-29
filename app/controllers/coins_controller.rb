@@ -9,6 +9,13 @@ class CoinsController < ApplicationController
     else
       @coins = Coin.all
     end
+    #@coin_alert = @coin.last_coin_alert(current_user)
+    respond_to do |format|
+      format.json {render json: {result: !!@coin}}
+      format.html {}
+      format.js {}
+    end
+
   end
 
   def new
@@ -38,6 +45,18 @@ class CoinsController < ApplicationController
 
   end
 
+
+  def toggle_alert_status 
+    @coin_alert = CoinAlert.where(coin_id: params[:id], user_id: current_user.id).last
+    @coin_alert.toggle!(:status)
+    @coin = Coin.find(params[:id])
+    
+    respond_to do |f|
+      f.js
+    end
+ 
+  end 
+
   private
 
   def coin_params
@@ -65,5 +84,8 @@ class CoinsController < ApplicationController
     }
     next_code.join
   end
+
+
+
 
 end

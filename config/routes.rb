@@ -4,8 +4,10 @@ Rails.application.routes.draw do
 
   resources :groups
   resources :coins do
+    get 'toggle_alert_status', :on => :member
     resources :moments
   end
+
 
   devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions', :omniauth_callbacks => "users/omniauth_callbacks"}
 

@@ -43,7 +43,7 @@ class MomentsController < ApplicationController
         )
     end 
     # find all the alerts 
-    @alerts = CoinAlert.where(coin_id: @coin.id)
+    @alerts = CoinAlert.where(coin_id: @coin.id, status: true)
     # make sure you have one record per user (in case a user has multiple 
     # moments - unlikely, but could happen the way we are set up now)
     @uniq_alerts = @alerts.select(:user_id).distinct
@@ -53,7 +53,7 @@ class MomentsController < ApplicationController
             #sends the mail to each user with an alert for this coin
             #am sending this for each user, rather than bcc'ing one email 
             #to a list of users. Figure this is OK for now. 
-            UserMailer.moment_mail(current_user, @coin).deliver_later
+            UserMailer.moment_mail(user, @coin).deliver_later
           end
     end 
 

@@ -22,9 +22,14 @@
                         <th>
                             Last transaction location
                         </th>
+                        <th>
+                            Alerts<br>
+                            (Toggle on/off)
+                        </th>
                     </tr>
                     <%= render @coins %>
-                </tbody>
+
+                    </tbody>
             </table><!--cart table end-->
             <% if @coins.size == 0 %>
                 <tr>
@@ -53,3 +58,4 @@
         </div><!--sidebar-->
     </div>
 </div><!--shop columns container end-->
+
