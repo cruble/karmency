@@ -27,6 +27,8 @@ class CoinsController < ApplicationController
     @coin.code = next_code(Coin.last.code)
     @coin.creator = current_user
     @coin.save
+    CoinAlert.create(coin_id: @coin.id, user_id: current_user.id, status: true)
+    
   end
 
   def show
