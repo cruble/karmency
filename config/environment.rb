@@ -6,11 +6,11 @@ Rails.application.initialize!
 
 # Configure mailer
 ActionMailer::Base.smtp_settings = {
-  :address        => 'smtp.gmail.com',
-  :domain         => 'mail.google.com',
+  :address        => 'smtp.sendgrid.net',
+  :domain         => 'heroku.com',
   :port           => 587,
-  :user_name      => 'givekarmency@gmail.com',
-  :password       => ENV['GMAIL_PASSWORD'],
+  :user_name      => ENV['SENDGRID_USERNAME'],
+  :password       => ENV['SENDGRID_PASSWORD'],
   :authentication => :plain,
   :enable_starttls_auto => true
 }
