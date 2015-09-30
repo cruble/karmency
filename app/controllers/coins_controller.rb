@@ -5,10 +5,9 @@ class CoinsController < ApplicationController
 
   def index
     if params[:my_coins]
-      @coins = current_user.coins
-      binding.pry 
+      @coins = (current_user.coins + Coin.where(creator_id: current_user.id)).uniq 
     else
-      @coins = Coin.all
+      @coins = Coin.last(25)
     end
     #@coin_alert = @coin.last_coin_alert(current_user)
     respond_to do |format|
