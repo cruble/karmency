@@ -40,6 +40,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def coins_made_last_24
+    Coin.where(created_at: (Time.now - 1.day)..Time.now, creator_id: 1).count
+  end 
+
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email || "no_email@example.com" # TODO: consider other strategies here

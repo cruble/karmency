@@ -4,7 +4,8 @@ class CoinsController < ApplicationController
   end
 
   def index
-    if params[:my_coins]
+
+    if params[:my_coins] || user_signed_in?
       @coins = (current_user.coins + Coin.where(creator_id: current_user.id)).uniq 
     else
       @coins = Coin.last(25)
@@ -24,14 +25,20 @@ class CoinsController < ApplicationController
 
   def create
 
+    if current_user.coins_made_last_24 >= 4
+      # this isn't working
+      # add some kind of modal/alert and redirect to the users coins page 
+    end 
+
+
     @coin = Coin.new(coin_params)
     # checking if the code is reserved
     next_code_temp = next_code(Coin.last.code)
+    # not sure a while loop is the best way to go here 
     while ReservedCode.where(code: next_code_temp).first
       next_code_temp = next_code(next_code_temp)
     end 
     @coin.code = next_code_temp
-    binding.pry 
     @coin.creator = current_user
     @coin.save
     CoinAlert.create(coin_id: @coin.id, user_id: current_user.id, status: true)
@@ -76,7 +83,7 @@ class CoinsController < ApplicationController
     # create hex alphabet - 4 digits
     values =  ("0".."9").to_a + ("A".."Z").to_a
 
-    # lost the I and O because they look like 1 and 0, confusing 
+    # lose the I and O because they look like 1 and 0, confusing 
     values.delete("I")
     values.delete("O")
 
