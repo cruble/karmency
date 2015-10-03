@@ -23,8 +23,15 @@ class CoinsController < ApplicationController
   end
 
   def create
+
     @coin = Coin.new(coin_params)
-    @coin.code = next_code(Coin.last.code)
+    # checking if the code is reserved
+    next_code_temp = next_code(Coin.last.code)
+    while ReservedCode.where(code: next_code_temp).first
+      next_code_temp = next_code(next_code_temp)
+    end 
+    @coin.code = next_code_temp
+    binding.pry 
     @coin.creator = current_user
     @coin.save
     CoinAlert.create(coin_id: @coin.id, user_id: current_user.id, status: true)
@@ -65,7 +72,7 @@ class CoinsController < ApplicationController
     params.require(:coin).permit(:description, :state, :city)
   end
 
-    def next_code(last_code)
+  def next_code(last_code)
     # create hex alphabet - 4 digits
     values =  ("0".."9").to_a + ("A".."Z").to_a
 
@@ -83,33 +90,33 @@ class CoinsController < ApplicationController
     d_4 = values.index(last_code_array[3])
     #first digit increment 
     if d_4 < 34   
-        d_4 += 1
+      d_4 += 1
     end 
 
     #first digit flip when hits last value of array  
     if d_4 == 34 
-        d_4 = 0 
-        if d_3 < 33
-            d_3 += 1
+      d_4 = 0 
+      if d_3 < 33
+        d_3 += 1
         #second digit flip 
-        elsif d_3 == 33
-            d_3 = 0 
-            if d_2 < 33 
-                d_2 += 1 
+      elsif d_3 == 33
+        d_3 = 0 
+        if d_2 < 33 
+          d_2 += 1 
             #third digit flip 
-            elsif d_2 == 33 
-                d_2 = 0 
-                if d_1 < 33
-                    d_1 += 1 
+          elsif d_2 == 33 
+            d_2 = 0 
+            if d_1 < 33
+              d_1 += 1 
 
-                elsif d_1 == 33 
-                    d_1 = 33
-                    puts "yikes that's the end of the codes"
-                end 
+            elsif d_1 == 33 
+              d_1 = 33
+              puts "yikes that's the end of the codes"
             end 
+          end 
         end
-    end
-    new_code = values[d_1].to_s + values[d_2].to_s + values[d_3].to_s + values[d_4].to_s
+      end
+      new_code = values[d_1].to_s + values[d_2].to_s + values[d_3].to_s + values[d_4].to_s
 
     end 
 
@@ -135,8 +142,6 @@ class CoinsController < ApplicationController
   #   }
   #   next_code.join
   # end
-
-
 
 
 end
