@@ -9,3 +9,8 @@ $('#user-info-dropdown').replaceWith('<%= j render partial: 'layouts/navbar_user
 if (window.location.pathname.match(/users\/sign_up/)) {
     window.location = "/";
 }
+
+// redirect if on sign-in page
+if (window.location.pathname.match(/users\/sign_in/)) {
+    window.location = "/";
+}
