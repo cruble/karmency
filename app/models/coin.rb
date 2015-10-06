@@ -86,6 +86,8 @@ class Coin < ActiveRecord::Base
       else
        "Off"
       end
+    else 
+      "N/A"
     end 
   end 
 

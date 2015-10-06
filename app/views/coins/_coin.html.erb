@@ -25,12 +25,8 @@
     <td>
         <%= coin.last_transaction_location %>
     </td>
-        <% if user_signed_in? && coin.creator.id == current_user.id %>
+        <% if user_signed_in?  %>
         <%= render 'alert', :coin => coin %>
-        <% else %> 
-        <td>
-        N/A
-        </td>
         <% end %>
 
 </tr>
