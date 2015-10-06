@@ -12,6 +12,9 @@ amanda = User.create(first_name: "Amanda", last_name: "Chang", email: "amanda@ex
 
 coin1 = Coin.create(code: "0001", creator: chad)
 coin2 = Coin.create(code: "0002", creator: parker)
+coin3 = Coin.create(code: "0003", creator: parker)
+coin4 = Coin.create(code: "0004", creator: parker)
+coin5 = Coin.create(code: "0005", creator: parker)
 
 
 moment1 = Moment.create(coin_id: 1, description: "He gave his seat", location: "Brooklyn, NY")
@@ -31,3 +34,25 @@ moment4.giver = amanda
 moment4.receiver = chad 
 
 [moment1, moment2, moment3, moment4].each {|moment| moment.save}
+
+def next_number(last_number)
+  if last_number.to_i < 9
+    "0" + (last_number.to_i + 1).to_s
+  else 
+    (last_number.to_i + 1).to_s
+  end 
+end 
+
+reserved_initials = ["AR", "JG", "PL", "LR", "XX", "KC", "CR"]
+reserved_initials.each do | initials|
+  first_code = initials + "00"
+  ReservedCode.create(code: first_code)
+  numbers = ["0"]
+  99.times {
+    last_number = next_number(numbers[-1])
+    numbers << last_number
+    ReservedCode.create(code: (initials + last_number))
+  }
+end 
+
+

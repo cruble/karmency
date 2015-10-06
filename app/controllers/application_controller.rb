@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   def home
     @coins = Coin.count
     @transactions = Moment.count
-    @cities = Moment.select(:city).count
-    @states = Moment.select(:state).count
+    @cities = Moment.select(:city).uniq.count
+    @states = Moment.select(:state).uniq.count
   end
 
   def login_status

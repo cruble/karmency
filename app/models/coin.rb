@@ -51,6 +51,23 @@ class Coin < ActiveRecord::Base
     end
   end
 
+  def num_states 
+    if moments.size > 0
+      self.moments.select(:state).uniq.count
+    else
+      1
+    end
+  end 
+
+  def num_cities 
+    if moments.size > 0
+      self.moments.select(:city).uniq.count
+    else
+      1
+    end
+  end 
+
+
   def user_alert_status(current_user)
     coin_alert = CoinAlert.where(coin_id: self.id, user_id: current_user.id)
     if coin_alert.last

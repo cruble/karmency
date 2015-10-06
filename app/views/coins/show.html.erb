@@ -62,9 +62,23 @@
                         <div class="panel-body">
                             <ul>
                                 <li>Number of transactions: <%= @coin.moments.size %></li>
-                                <li>Last transaction date: </li>
-                                <li>Last received by: </li>
-                                <li>Average time between transactions: </li>
+                                <li>Last transaction date: 
+                                    <% if @coin.moments.last %>
+                                    <%= @coin.moments.last.formatted_date %>
+                                    <% end %> 
+                                </li>
+                                <li>Last received by: 
+                                    <% if @coin.moments.last %>
+                                        <% if @coin.moments.last.receiver %>
+                                        <%= @coin.moments.last.receiver.formatted_name  %>
+                                        <% else %>
+                                        Currently Unknown
+                                        <% end %>
+                                    <% end %> 
+                                <li>Average time between transactions:
+                                        <%= @coin.avg_trans_time %>
+
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -80,16 +94,14 @@
                     <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false">
                         <div class="panel-body">
                             <ul>
-                                <li>Last transaction location: </li>
-                                <li>Longest distance from creation: </li>
-                                <li>Number states visited: </li>
-                                <li>Most common state: </li>
-                                <li>Number of cities visited: </li>
+                                <li>Last transaction location: <%= @coin.last_transaction_location %> </li>
+                                <li>Number states visited: <%= @coin.num_states %></li>
+                                <li>Number of cities visited: <%= @coin.num_cities %> </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
+<!--                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="collapsed" aria-expanded="false">
@@ -102,7 +114,7 @@
                             - Placeholder for map -
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div><!-- coin stats-->
     </div>

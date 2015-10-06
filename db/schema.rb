@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151003142752) do
+ActiveRecord::Schema.define(version: 20151005224443) do
 
   create_table "coin_alerts", force: :cascade do |t|
     t.integer  "coin_id"
@@ -27,23 +27,14 @@ ActiveRecord::Schema.define(version: 20151003142752) do
   create_table "coins", force: :cascade do |t|
     t.string   "creation_location"
     t.string   "code"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "creator_id"
     t.string   "city"
     t.string   "state"
     t.string   "description"
+    t.boolean  "is_reserved",       default: false
   end
-
-  create_table "create_coin_alerts", force: :cascade do |t|
-    t.integer  "coin_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "create_coin_alerts", ["coin_id"], name: "index_create_coin_alerts_on_coin_id"
-  add_index "create_coin_alerts", ["user_id"], name: "index_create_coin_alerts_on_user_id"
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"

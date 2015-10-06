@@ -3,6 +3,7 @@
     <td>
         <strong><%= link_to "#{coin.code}", coin_path(coin.code) %></strong>
     </td>
+    <% if user_signed_in? %>
     <td>
         <% if coin.creator.id == current_user.id %>
             You
@@ -10,6 +11,11 @@
             <%= coin.creator.formatted_name %>
         <% end %>
     </td>
+    <% else %>
+        <td>
+            <%= coin.creator.formatted_name %>
+        </td>
+    <% end %>
     <td>
         <%= coin.formatted_location %>
     </td>

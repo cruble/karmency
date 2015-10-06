@@ -25,22 +25,27 @@ class CoinsController < ApplicationController
 
   def create
 
-    if current_user.coins_made_last_24 >= 4
-      # this isn't working
-      # add some kind of modal/alert and redirect to the users coins page 
+    if current_user.coins_made_last_24 >= 25
+      flash[:alert] = "Sorry, but you can only mint 25 coins during a 24-hour period. If you are an educator and need to mint a large batch of coins. Please reach out to team@karmency.org"
+      render :js => "window.location = '/coins?my_coins=true'" and return
     end 
 
-
     @coin = Coin.new(coin_params)
-    # checking if the code is reserved
-    next_code_temp = next_code(Coin.last.code)
-    # not sure a while loop is the best way to go here 
+    # need to checking if that code (or next sequential) is reserved
+    # this blocks web users from using reserved codes. 
+    next_unreserved_code = Coin.where(is_reserved: false).last.code
+
+
+    next_code_temp = next_code(next_unreserved_code)
+    # now we check that the next code is not reserved, skip until it is
     while ReservedCode.where(code: next_code_temp).first
       next_code_temp = next_code(next_code_temp)
     end 
     @coin.code = next_code_temp
     @coin.creator = current_user
     @coin.save
+    # is_reserved defaults to true. maybe a different logic for admins?  
+    # or we just create coins in the console
     CoinAlert.create(coin_id: @coin.id, user_id: current_user.id, status: true)
     
   end
