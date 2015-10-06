@@ -36,18 +36,28 @@ class Coin < ActiveRecord::Base
 
   def avg_trans_time
     total_time = 0
-    moments.reverse.inject(moments.last) do |memo, moment|
-      unless memo == moment
-        total_time += memo.date - moment.date
-        memo = moment
-      end
-      memo
-    end
+    if moments.size > 0 
+      total_time += (moments.last.created_at - created_at)
+    end 
 
-    if moments.size > 0
-      "#{(total_time / (moments.size - 1)).to_i} days"
-    else
+
+    if moments.size == 0
       "N/A"
+      "#{(total_time / (moments.size - 1)).to_i} days"
+    elsif moments.size == 1
+      days = ((moments.last.created_at - created_at) / (24*60*60)).round(2)
+      "#{days} days"
+    elsif moments.size > 1 
+      moments.reverse.inject(moments.last) do |memo, moment|
+        unless memo == moment
+          total_time += memo.created_at - moment.created_at
+          memo = moment
+        end
+        memo
+      end
+      avg_total = total_time / moments.size
+      days = avg_total / (24*60*60)
+      "#{days.round(2)} days"
     end
   end
 
