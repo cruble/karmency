@@ -5,8 +5,12 @@ class CoinsController < ApplicationController
 
   def index
 
-    if params[:my_coins] || user_signed_in?
-      @coins = (current_user.coins + Coin.where(creator_id: current_user.id)).uniq 
+    if params[:my_coins] 
+      if user_signed_in? 
+        @coins = (current_user.coins + Coin.where(creator_id: current_user.id)).uniq
+      else 
+        @coins = Coin.last(25)
+      end  
     else
       @coins = Coin.last(25)
     end

@@ -55,4 +55,14 @@ reserved_initials.each do | initials|
   }
 end 
 
+# Coin.all.each do |coin|
+#   CoinAlert.create(coin_id: coin.id, user_id: coin.creator.id, status:true)
+# end 
+i = 5
+10.times {
+  CoinAlert.create(coin_id: i, user_id: 6, status: true)
+  i += 1 
+}
+
+
 
