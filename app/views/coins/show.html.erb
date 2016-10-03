@@ -62,19 +62,19 @@
                         <div class="panel-body">
                             <ul>
                                 <li>Number of transactions: <%= @coin.moments.size %></li>
-                                <li>Last transaction date: 
+                                <li>Last transaction date:
                                     <% if @coin.moments.last %>
                                     <%= @coin.moments.last.formatted_date %>
-                                    <% end %> 
+                                    <% end %>
                                 </li>
-                                <li>Last received by: 
+                                <li>Last received by:
                                     <% if @coin.moments.last %>
                                         <% if @coin.moments.last.receiver %>
                                         <%= @coin.moments.last.receiver.formatted_name  %>
                                         <% else %>
                                         Currently Unknown
                                         <% end %>
-                                    <% end %> 
+                                    <% end %>
                                 <li>Average time between transactions:
                                         <%= @coin.avg_trans_time %>
 
@@ -187,7 +187,7 @@
 
 
 <script type="text/javascript" src="/parker-additions/js/three.min.js"></script>
-<script src='http://threejs.org/examples/fonts/helvetiker_bold.typeface.js'></script>
+<script src='/parker-additions/js/helvetiker_bold.typeface.js'></script>
 <script src='/parker-additions/js/filesaver.js'></script>
 <script src='/parker-additions/js/exportSTL.js'></script>
 <script src='/parker-additions/js/importSTL.js'></script>
